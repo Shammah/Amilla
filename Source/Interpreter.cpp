@@ -121,7 +121,7 @@ void Interpreter::Clear()
 
 void Interpreter::Return()
 {
-    throw exception("Not implemented yet!");
+    _state.PC = _state.Stack[--_state.SP];
 }
 
 void Interpreter::Jump()
@@ -131,7 +131,8 @@ void Interpreter::Jump()
 
 void Interpreter::Call2()
 {
-    throw exception("Not implemented yet!");
+    _state.Stack[_state.SP++] = _state.PC;
+    _state.PC = _opcode.nnn;
 }
 
 void Interpreter::SkipEqualsNN()
