@@ -115,7 +115,8 @@ void Interpreter::Call()
 
 void Interpreter::Clear()
 {
-    throw exception("Not implemented yet!");
+    for (auto& pixel : _display.Pixels)
+        pixel = 0;
 }
 
 void Interpreter::Return()
