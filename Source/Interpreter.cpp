@@ -100,17 +100,12 @@ inline void Interpreter::Skip()
 
 void Interpreter::Special()
 {
-    if (_opcode.x == 0x0)
+    switch (_opcode.nnn)
     {
-        if (_opcode.n == 0x0)
-            Clear();
-        else if (_opcode.n == 0xE)
-            Return();
-        else
-            throw exception("Unknown opcode!");
+    case 0x0E0: Clear(); break;
+    case 0x0EE: Return(); break;
+    default: Call();
     }
-    else
-        Call();
 }
 
 void Interpreter::Call()
