@@ -28,9 +28,9 @@ namespace Chip8
 
     private:
         /** Random number regeneration. */
-        std::random_device rd;
-        std::mt19937 gen;
-        std::uniform_int_distribution<> RNG;
+        std::random_device _rd;
+        std::mt19937 _gen;
+        std::uniform_int_distribution<> _RNG;
 
     public:
         /**

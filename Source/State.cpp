@@ -2,7 +2,7 @@
 using namespace Chip8;
 
 State::State()
-    : RNG(0, 255)
+    : _RNG(0, 255)
 {
     Reset();
 }
@@ -14,7 +14,7 @@ State::~State()
 
 void State::Reset()
 {
-    gen.seed(rd());
+    _gen.seed(_rd());
 
     I = 0;
     DelayTimer = 0;
@@ -29,5 +29,5 @@ void State::Reset()
 
 State::reg_t State::Random()
 {
-    return (reg_t)RNG(gen);
+    return (reg_t)_RNG(_gen);
 }
