@@ -56,7 +56,7 @@ namespace Chip8
         addr_t PC, SP;
 
         /** States of all keys being pressed. */
-        std::array<reg_t, NUM_KEYS> Keys;
+        std::array<bool, NUM_KEYS> Keys;
 
         /**
          * The stack is an array of 12 16-bit values, used to store the
