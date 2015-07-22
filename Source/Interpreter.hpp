@@ -84,8 +84,13 @@ namespace Chip8
         void Reset();
 
         inline const Storage& GetStorage() const { return _storage; }
+        inline Storage& GetStorage() { return _storage; }
+
         inline const State& GetState() const { return _state; }
+        inline State& GetState() { return _state; }
+
         inline const Display& GetDisplay() const { return _display; }
+        inline Display& GetDisplay() { return _display; }
 
     private:
         /** OPERATIONS */
