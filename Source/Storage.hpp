@@ -29,6 +29,6 @@ namespace Chip8
 
     public:
         /** Resets the entire machine, inlcuding both memory and state. */
-        void Reset();
+        void Reset() override;
     };
 }

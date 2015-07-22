@@ -67,7 +67,7 @@ namespace Chip8
 
     public:
         /** Reset the entire state. */
-        void Reset();
+        void Reset() override;
 
         /**
          * Generates a random number.

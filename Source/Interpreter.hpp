@@ -81,7 +81,7 @@ namespace Chip8
     public:
         void Open(const std::string& rom);
         void Tick();
-        void Reset();
+        void Reset() override;
 
         inline const Storage& GetStorage() const { return _storage; }
         inline Storage& GetStorage() { return _storage; }

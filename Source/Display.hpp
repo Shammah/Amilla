@@ -27,7 +27,7 @@ namespace Chip8
         std::array<uint8_t, WIDTH * HEIGHT / 8> Pixels;
 
     public:
-        void Reset();
+        void Reset() override;
         void InstallFont();
     };
 }
