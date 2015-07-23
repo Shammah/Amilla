@@ -6,7 +6,7 @@
 
 namespace Chip8
 {
-    class Display : IResettable
+    class Display : public IResettable
     {
     public:
         static constexpr uint8_t WIDTH = 64;

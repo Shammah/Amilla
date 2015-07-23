@@ -9,7 +9,7 @@ namespace Chip8
     /**
      * The state of Chip8 machine. like register values and screen output.
      */
-    class State : IResettable
+    class State : public IResettable
     {
     public:
         /** Type of a normal register. */

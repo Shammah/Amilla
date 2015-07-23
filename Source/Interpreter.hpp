@@ -27,7 +27,7 @@ namespace Chip8
      * into a machine, and execute it's state machine.
      * This class is essentially the 'CPU'.
      */
-    class Interpreter : IResettable
+    class Interpreter : public IResettable
     {
     public:
         /** Starting location in memory of loaded programs. */
