@@ -1,5 +1,5 @@
-.vs/*
+.vs/**
 Build/*
 Obj/*
-Chip8 Interpreter.sdf
-Chip8 Interpreter.opensdf
+*.sdf
+*.opensdf
