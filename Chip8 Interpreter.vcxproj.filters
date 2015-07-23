@@ -25,6 +25,9 @@
     <ClCompile Include="Source\Storage.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\InterpreterSFML.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Interpreter.hpp">
@@ -40,6 +43,15 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\IResettable.hpp">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IInterpreterShell.hpp">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InterpreterSFML.hpp">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IInterpreter.hpp">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

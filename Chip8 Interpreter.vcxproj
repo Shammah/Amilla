@@ -82,14 +82,18 @@
   <ItemGroup>
     <ClCompile Include="Source\Display.cpp" />
     <ClCompile Include="Source\Interpreter.cpp" />
+    <ClCompile Include="Source\InterpreterSFML.cpp" />
     <ClCompile Include="Source\Storage.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Display.hpp" />
+    <ClInclude Include="Source\IInterpreter.hpp" />
+    <ClInclude Include="Source\IInterpreterShell.hpp" />
     <ClInclude Include="Source\Interpreter.hpp" />
     <ClInclude Include="Source\IResettable.hpp" />
+    <ClInclude Include="Source\InterpreterSFML.hpp" />
     <ClInclude Include="Source\Storage.hpp" />
     <ClInclude Include="Source\State.hpp" />
   </ItemGroup>

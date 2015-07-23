@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <string>
 #include "Display.hpp"
+#include "IInterpreter.hpp"
 #include "IResettable.hpp"
 #include "Storage.hpp"
 #include "State.hpp"
@@ -27,7 +28,7 @@ namespace Chip8
      * into a machine, and execute it's state machine.
      * This class is essentially the 'CPU'.
      */
-    class Interpreter : public IResettable
+    class Interpreter : public IResettable, public IInterpreter
     {
     public:
         /** Starting location in memory of loaded programs. */
@@ -79,18 +80,18 @@ namespace Chip8
         Opcode Fetch();
 
     public:
-        void Open(const std::string& rom);
-        void Tick();
-        void Reset() override;
+        virtual void Open(const std::string& rom) override;
+        virtual void Tick() override;
+        virtual void Reset() override;
 
-        inline const Storage& GetStorage() const { return _storage; }
-        inline Storage& GetStorage() { return _storage; }
+        virtual const Storage& GetStorage() const override { return _storage; }
+        virtual Storage& GetStorage() override { return _storage; }
 
-        inline const State& GetState() const { return _state; }
-        inline State& GetState() { return _state; }
+        virtual const State& GetState() const override { return _state; }
+        virtual State& GetState() override { return _state; }
 
-        inline const Display& GetDisplay() const { return _display; }
-        inline Display& GetDisplay() { return _display; }
+        virtual const Display& GetDisplay() const override { return _display; }
+        virtual Display& GetDisplay() override { return _display; }
 
     private:
         /** OPERATIONS */
