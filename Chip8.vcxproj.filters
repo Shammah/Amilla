@@ -10,48 +10,45 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Main.cpp">
+    <ClCompile Include="Source\Chip8\Interpreter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Interpreter.cpp">
+    <ClCompile Include="Source\Chip8\InterpreterSFML.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\State.cpp">
+    <ClCompile Include="Source\Chip8\Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Display.cpp">
+    <ClCompile Include="Source\Chip8\State.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Storage.cpp">
+    <ClCompile Include="Source\Chip8\Display.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\InterpreterSFML.cpp">
+    <ClCompile Include="Source\Chip8\Storage.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Interpreter.hpp">
+    <ClInclude Include="Source\Chip8\Display.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\State.hpp">
+    <ClInclude Include="Source\Chip8\Interpreter.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Display.hpp">
+    <ClInclude Include="Source\Chip8\State.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Storage.hpp">
+    <ClInclude Include="Source\Chip8\Storage.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IResettable.hpp">
+    <ClInclude Include="Source\Chip8\InterpreterSFML.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IInterpreterShell.hpp">
+    <ClInclude Include="Source\Chip8\IInterpreterShell.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\InterpreterSFML.hpp">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\IInterpreter.hpp">
+    <ClInclude Include="Source\Chip8\IInterpreter.hpp">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

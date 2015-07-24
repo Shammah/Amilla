@@ -1,7 +1,7 @@
 #pragma once
 
 #include <array>
-#include "IResettable.hpp"
+#include "Interfaces/IResettable.hpp"
 
 namespace Chip8
 {

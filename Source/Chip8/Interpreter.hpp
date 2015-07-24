@@ -2,9 +2,9 @@
 
 #include <assert.h>
 #include <string>
+#include "Interfaces/IResettable.hpp"
 #include "Display.hpp"
 #include "IInterpreter.hpp"
-#include "IResettable.hpp"
 #include "Storage.hpp"
 #include "State.hpp"
 

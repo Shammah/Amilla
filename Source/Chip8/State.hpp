@@ -2,7 +2,7 @@
 
 #include <array>
 #include <random>
-#include "IResettable.hpp"
+#include "Interfaces/IResettable.hpp"
 
 namespace Chip8
 {
