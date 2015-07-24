@@ -8,6 +8,9 @@
     <Filter Include="Source">
       <UniqueIdentifier>{54eba7db-d4ae-475a-9988-420eb1af31b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Interfaces">
+      <UniqueIdentifier>{913a7305-e575-4aaa-917e-b2b59946b500}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Chip8\Interpreter.cpp">
@@ -45,11 +48,11 @@
     <ClInclude Include="Source\Chip8\InterpreterSFML.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Chip8\IInterpreterShell.hpp">
-      <Filter>Source</Filter>
+    <ClInclude Include="Source\Chip8\Interfaces\IInterpreterShell.hpp">
+      <Filter>Source\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Chip8\IInterpreter.hpp">
-      <Filter>Source</Filter>
+    <ClInclude Include="Source\Chip8\Interfaces\IInterpreter.hpp">
+      <Filter>Source\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

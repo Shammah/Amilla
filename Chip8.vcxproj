@@ -20,8 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Chip8\Display.hpp" />
-    <ClInclude Include="Source\Chip8\IInterpreter.hpp" />
-    <ClInclude Include="Source\Chip8\IInterpreterShell.hpp" />
+    <ClInclude Include="Source\Chip8\Interfaces\IInterpreter.hpp" />
+    <ClInclude Include="Source\Chip8\Interfaces\IInterpreterShell.hpp" />
     <ClInclude Include="Source\Chip8\Interpreter.hpp" />
     <ClInclude Include="Source\Chip8\InterpreterSFML.hpp" />
     <ClInclude Include="Source\Chip8\State.hpp" />

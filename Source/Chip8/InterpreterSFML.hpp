@@ -2,7 +2,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
-#include "IInterpreterShell.hpp"
+#include "Interfaces/IInterpreterShell.hpp"
 
 namespace Chip8
 {
