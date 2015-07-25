@@ -2,14 +2,14 @@
 
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
-#include "Interfaces/IInterpreterShell.hpp"
+#include "Interfaces/IEmulatorShell.hpp"
 
 namespace Chip8
 {
-    class InterpreterSFML : public IInterpreterShell<sf::Keyboard::Key>
+    class EmulatorSFML : public IEmulatorShell<sf::Keyboard::Key>
     {
     private:
-        std::shared_ptr<IInterpreter> _interpreter;
+        std::shared_ptr<IEmulator> _emulator;
         std::unique_ptr<sf::RenderWindow> _window;
 
         std::unordered_map<sf::Keyboard::Key, uint8_t> _keyMapping =
@@ -33,11 +33,11 @@ namespace Chip8
         };
 
     public:
-        InterpreterSFML(std::shared_ptr<IInterpreter> interpreter);
-        virtual ~InterpreterSFML();
+        EmulatorSFML(std::shared_ptr<IEmulator> emulator);
+        virtual ~EmulatorSFML();
 
-        virtual const std::unordered_map<sf::Keyboard::Key, uint8_t>& GetKeyMapping() { return _keyMapping; }
-        virtual const std::shared_ptr<IInterpreter> GetInterpreter() const { return _interpreter; };
+        virtual const std::unordered_map<sf::Keyboard::Key, uint8_t>& GetKeyMapping() override { return _keyMapping; }
+        virtual const std::shared_ptr<IEmulator> GetEmulator() const override { return _emulator; };
 
         virtual void Start() override;
         virtual void Tick();

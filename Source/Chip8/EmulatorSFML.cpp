@@ -1,24 +1,24 @@
-#include "InterpreterSFML.hpp"
+#include "EmulatorSFML.hpp"
 using namespace Chip8;
 
-InterpreterSFML::InterpreterSFML(std::shared_ptr<IInterpreter> interpreter)
+EmulatorSFML::EmulatorSFML(std::shared_ptr<IEmulator> emulator)
     : _window(std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(800, 600), "Shammah's Chip8 Emulator")))
 {
-    _interpreter = interpreter;
+    _emulator = emulator;
 }
 
-InterpreterSFML::~InterpreterSFML()
+EmulatorSFML::~EmulatorSFML()
 {
 
 }
 
-void InterpreterSFML::Start()
+void EmulatorSFML::Start()
 {
    while (_window->isOpen())
        Tick();
 }
 
-void InterpreterSFML::Tick()
+void EmulatorSFML::Tick()
 {
     // Process events
     sf::Event event;
@@ -39,18 +39,18 @@ void InterpreterSFML::Tick()
         case sf::Event::KeyPressed:
             key = _keyMapping.find(event.key.code);
             if (key != _keyMapping.cend())
-                _interpreter->GetState().Keys[key->second] = true;
+                _emulator->GetState().Keys[key->second] = true;
             break;
 
         case sf::Event::KeyReleased:
             key = _keyMapping.find(event.key.code);
             if (key != _keyMapping.cend())
-                _interpreter->GetState().Keys[key->second] = false;
+                _emulator->GetState().Keys[key->second] = false;
             break;
         }
     }
 
-    _interpreter->Tick();
+    _emulator->Tick();
 
     // Clear screen
     _window->clear();
@@ -59,7 +59,7 @@ void InterpreterSFML::Tick()
     _window->display();
 }
 
-void InterpreterSFML::Stop()
+void EmulatorSFML::Stop()
 {
     _window->close();
 }

@@ -1,62 +1,62 @@
 #include <fstream>
-#include "Interpreter.hpp"
+#include "Emulator.hpp"
 using namespace std;
 using namespace Chip8;
 
-Interpreter::Interpreter()
+Emulator::Emulator()
 {
     _mainOpcodeTable =
     {
-        &Interpreter::Special,
-        &Interpreter::Jump,
-        &Interpreter::Call2,
-        &Interpreter::SkipEqualsNN,
-        &Interpreter::SkipNotEqualsNN,
-        &Interpreter::SkipEqualsReg,
-        &Interpreter::StoreNN,
-        &Interpreter::AddNN,
-        &Interpreter::Arithmetic,
-        &Interpreter::SkipNotEqualsReg,
-        &Interpreter::StoreI,
-        &Interpreter::JumpV0,
-        &Interpreter::Rand,
-        &Interpreter::Draw,
-        &Interpreter::Key,
-        &Interpreter::Advanced
+        &Emulator::Special,
+        &Emulator::Jump,
+        &Emulator::Call2,
+        &Emulator::SkipEqualsNN,
+        &Emulator::SkipNotEqualsNN,
+        &Emulator::SkipEqualsReg,
+        &Emulator::StoreNN,
+        &Emulator::AddNN,
+        &Emulator::Arithmetic,
+        &Emulator::SkipNotEqualsReg,
+        &Emulator::StoreI,
+        &Emulator::JumpV0,
+        &Emulator::Rand,
+        &Emulator::Draw,
+        &Emulator::Key,
+        &Emulator::Advanced
     };
 
     _arithOpcodeTable =
     {
-        &Interpreter::Store,
-        &Interpreter::Or,
-        &Interpreter::And,
-        &Interpreter::Xor,
-        &Interpreter::Add,
-        &Interpreter::Sub,
-        &Interpreter::Shr,
-        &Interpreter::Sub2,
-        &Interpreter::Shl
+        &Emulator::Store,
+        &Emulator::Or,
+        &Emulator::And,
+        &Emulator::Xor,
+        &Emulator::Add,
+        &Emulator::Sub,
+        &Emulator::Shr,
+        &Emulator::Sub2,
+        &Emulator::Shl
     };
 }
 
-Interpreter::~Interpreter()
+Emulator::~Emulator()
 {
 }
 
-void Interpreter::Tick()
+void Emulator::Tick()
 {
     _opcode = Fetch();
     (this->*_mainOpcodeTable[_opcode.u])();
 }
 
-void Interpreter::Reset()
+void Emulator::Reset()
 {
     _storage.Reset();
     _state.Reset();
     _display.Reset();
 }
 
-void Interpreter::Open(const string& rom)
+void Emulator::Open(const string& rom)
 {
     ifstream file(rom, std::ios::binary);
     int i = START;
@@ -67,7 +67,7 @@ void Interpreter::Open(const string& rom)
     _state.PC = START;
 }
 
-Interpreter::Opcode Interpreter::Fetch()
+Emulator::Opcode Emulator::Fetch()
 {
     // Fetch operation code. Remember that they are two bytes big.
     uint16_t& PC    = _state.PC;
@@ -88,17 +88,17 @@ Interpreter::Opcode Interpreter::Fetch()
 }
 
 // OPERATIONS
-void Interpreter::Nop()
+void Emulator::Nop()
 {
 
 }
 
-inline void Interpreter::Skip()
+inline void Emulator::Skip()
 {
     _state.PC += 2;
 }
 
-void Interpreter::Special()
+void Emulator::Special()
 {
     switch (_opcode.nnn)
     {
@@ -108,68 +108,68 @@ void Interpreter::Special()
     }
 }
 
-void Interpreter::Call()
+void Emulator::Call()
 {
     throw exception("Not implemented yet!");
 }
 
-void Interpreter::Clear()
+void Emulator::Clear()
 {
     for (auto& pixel : _display.Pixels)
         pixel = 0;
 }
 
-void Interpreter::Return()
+void Emulator::Return()
 {
     _state.PC = _state.Stack[--_state.SP];
 }
 
-void Interpreter::Jump()
+void Emulator::Jump()
 {
     _state.PC = _opcode.nnn;
 }
 
-void Interpreter::Call2()
+void Emulator::Call2()
 {
     _state.Stack[_state.SP++] = _state.PC;
     _state.PC = _opcode.nnn;
 }
 
-void Interpreter::SkipEqualsNN()
+void Emulator::SkipEqualsNN()
 {
     GET_Vx();
     if (Vx == _opcode.nn)
         Skip();
 }
 
-void Interpreter::SkipNotEqualsNN()
+void Emulator::SkipNotEqualsNN()
 {
     GET_Vx();
     if (Vx != _opcode.nn)
         Skip();
 }
 
-void Interpreter::SkipEqualsReg()
+void Emulator::SkipEqualsReg()
 {
     GET_VxVy();
     if (Vx == Vy)
         Skip();
 }
 
-void Interpreter::StoreNN()
+void Emulator::StoreNN()
 {
     GET_Vx();
     Vx = _opcode.nn;
 }
 
-void Interpreter::AddNN()
+void Emulator::AddNN()
 {
     // This may overflow!!! This is by design!
     GET_Vx();
     Vx += _opcode.nn;
 }
 
-void Interpreter::Arithmetic()
+void Emulator::Arithmetic()
 {
     auto& n = _opcode.n;
 
@@ -179,31 +179,31 @@ void Interpreter::Arithmetic()
         (this->*_arithOpcodeTable[n])();
 }
 
-void Interpreter::Store()
+void Emulator::Store()
 {
     GET_VxVy();
     Vx = Vy;
 }
 
-void Interpreter::Or()
+void Emulator::Or()
 {
     GET_VxVy();
     Vx |= Vy;
 }
 
-void Interpreter::And()
+void Emulator::And()
 {
     GET_VxVy();
     Vx &= Vy;
 }
 
-void Interpreter::Xor()
+void Emulator::Xor()
 {
     GET_VxVy();
     Vx ^= Vy;
 }
 
-void Interpreter::Add()
+void Emulator::Add()
 {
     GET_VxVy();
     GET_VF();
@@ -213,7 +213,7 @@ void Interpreter::Add()
     VF = res >> 8;
 }
 
-void Interpreter::Sub()
+void Emulator::Sub()
 {
     GET_VxVy();
     GET_VF();
@@ -222,7 +222,7 @@ void Interpreter::Sub()
     Vx -= Vy;
 }
 
-void Interpreter::Shr()
+void Emulator::Shr()
 {
     GET_VxVy();
     GET_VF();
@@ -231,7 +231,7 @@ void Interpreter::Shr()
     Vx = Vy >> 1;
 }
 
-void Interpreter::Sub2()
+void Emulator::Sub2()
 {
     GET_VxVy();
     GET_VF();
@@ -240,7 +240,7 @@ void Interpreter::Sub2()
     Vx = Vy - Vx;
 }
 
-void Interpreter::Shl()
+void Emulator::Shl()
 {
     GET_VxVy();
     GET_VF();
@@ -249,36 +249,36 @@ void Interpreter::Shl()
     Vx = Vy << 1;
 }
 
-void Interpreter::SkipNotEqualsReg()
+void Emulator::SkipNotEqualsReg()
 {
     GET_VxVy();
     if (Vx != Vy)
         Skip();
 }
 
-void Interpreter::StoreI()
+void Emulator::StoreI()
 {
     _state.I = _opcode.nnn;
 }
 
-void Interpreter::JumpV0()
+void Emulator::JumpV0()
 {
     auto& PC = _state.PC;
     PC = (_state.V[0] + _opcode.nnn) & 0xFFF;
 }
 
-void Interpreter::Rand()
+void Emulator::Rand()
 {
     GET_VxVy();
     Vx = _state.Random() & _opcode.nn;
 }
 
-void Interpreter::Draw()
+void Emulator::Draw()
 {
     throw exception("Not implemented yet!");
 }
 
-void Interpreter::Key()
+void Emulator::Key()
 {
     if (_opcode.nn == 0x9E)
         SkipKeyPressed();
@@ -288,21 +288,21 @@ void Interpreter::Key()
         throw exception("Unknown opcode!");
 }
 
-void Interpreter::SkipKeyPressed()
+void Emulator::SkipKeyPressed()
 {
     GET_Vx();
     if (_state.Keys[Vx & 0xF])
         Skip();
 }
 
-void Interpreter::SkipKeyNotPressed()
+void Emulator::SkipKeyNotPressed()
 {
     GET_Vx();
     if (!_state.Keys[Vx & 0xF])
         Skip();
 }
 
-void Interpreter::Advanced()
+void Emulator::Advanced()
 {
     switch (_opcode.nn)
     {
@@ -319,51 +319,51 @@ void Interpreter::Advanced()
     }
 }
 
-void Interpreter::LoadDelayTimer()
+void Emulator::LoadDelayTimer()
 {
     GET_Vx();
     Vx = _state.DelayTimer;
 }
 
-void Interpreter::WaitKey()
+void Emulator::WaitKey()
 {
     throw exception("Not implemented yet!");
 }
 
-void Interpreter::SetDelayTimer()
+void Emulator::SetDelayTimer()
 {
     GET_Vx();
     _state.DelayTimer = Vx;
 }
 
-void Interpreter::SetSoundTimer()
+void Emulator::SetSoundTimer()
 {
     GET_Vx();
     _state.SoundTimer = Vx;
 }
 
-void Interpreter::AddI()
+void Emulator::AddI()
 {
     GET_Vx();
     _state.I = Vx;
 }
 
-void Interpreter::FX29()
+void Emulator::FX29()
 {
     throw exception("Not implemented yet!");
 }
 
-void Interpreter::FX33()
+void Emulator::FX33()
 {
     throw exception("Not implemented yet!");
 }
 
-void Interpreter::FX55()
+void Emulator::FX55()
 {
     throw exception("Not implemented yet!");
 }
 
-void Interpreter::FX65()
+void Emulator::FX65()
 {
     throw exception("Not implemented yet!");
 }

@@ -13,12 +13,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Chip8\Interpreter.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Chip8\InterpreterSFML.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Chip8\Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -31,12 +25,15 @@
     <ClCompile Include="Source\Chip8\Storage.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Chip8\Emulator.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chip8\EmulatorSFML.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Chip8\Display.hpp">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Chip8\Interpreter.hpp">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\Chip8\State.hpp">
@@ -45,14 +42,17 @@
     <ClInclude Include="Source\Chip8\Storage.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Chip8\InterpreterSFML.hpp">
+    <ClInclude Include="Source\Chip8\Interfaces\IEmulatorShell.hpp">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Chip8\Interfaces\IEmulator.hpp">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Chip8\Emulator.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Chip8\Interfaces\IInterpreterShell.hpp">
-      <Filter>Source\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Chip8\Interfaces\IInterpreter.hpp">
-      <Filter>Source\Interfaces</Filter>
+    <ClInclude Include="Source\Chip8\EmulatorSFML.hpp">
+      <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

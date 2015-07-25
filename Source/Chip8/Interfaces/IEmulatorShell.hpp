@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <unordered_map>
-#include "IInterpreter.hpp"
+#include "IEmulator.hpp"
 
 namespace Chip8
 {
@@ -11,12 +11,12 @@ namespace Chip8
      * with the outside world; display, sound, input etc.
      */
     template <class KeyType>
-    class IInterpreterShell
+    class IEmulatorShell
     {
     public:
-        virtual ~IInterpreterShell() {};
+        virtual ~IEmulatorShell() {};
 
-        virtual const std::shared_ptr<IInterpreter> GetInterpreter() const = 0;
+        virtual const std::shared_ptr<IEmulator> GetEmulator() const = 0;
         virtual const std::unordered_map<KeyType, uint8_t>& GetKeyMapping() = 0;
 
         virtual void Start() = 0;

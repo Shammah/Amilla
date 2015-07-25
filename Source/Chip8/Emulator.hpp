@@ -2,7 +2,7 @@
 
 #include <assert.h>
 #include <string>
-#include "Interfaces/IInterpreter.hpp"
+#include "Interfaces/IEmulator.hpp"
 #include "Interfaces/IResettable.hpp"
 #include "Display.hpp"
 #include "Storage.hpp"
@@ -24,11 +24,11 @@
 namespace Chip8
 {
     /**
-     * A Chip8 interpreter is able to load a program
+     * A Chip8 emulator is able to load a program
      * into a machine, and execute it's state machine.
      * This class is essentially the 'CPU'.
      */
-    class Interpreter : public IResettable, public IInterpreter
+    class Emulator : public IResettable, public IEmulator
     {
     public:
         /** Starting location in memory of loaded programs. */
@@ -37,7 +37,7 @@ namespace Chip8
         static constexpr uint8_t NUM_ARITH_OPCODES = 0x9;
 
         /** An operation is just a function. */
-        typedef void(Interpreter::*Operation)();
+        typedef void(Emulator::*Operation)();
 
         /** A destructured operation code. */
         struct Opcode
@@ -53,8 +53,8 @@ namespace Chip8
         };
 
     public:
-        Interpreter();
-        virtual ~Interpreter();
+        Emulator();
+        virtual ~Emulator();
 
     private:
         /** The machine used by the interpreter. */

@@ -12,18 +12,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Chip8\Display.cpp" />
-    <ClCompile Include="Source\Chip8\Interpreter.cpp" />
-    <ClCompile Include="Source\Chip8\InterpreterSFML.cpp" />
+    <ClCompile Include="Source\Chip8\Emulator.cpp" />
+    <ClCompile Include="Source\Chip8\EmulatorSFML.cpp" />
     <ClCompile Include="Source\Chip8\Main.cpp" />
     <ClCompile Include="Source\Chip8\State.cpp" />
     <ClCompile Include="Source\Chip8\Storage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Chip8\Display.hpp" />
-    <ClInclude Include="Source\Chip8\Interfaces\IInterpreter.hpp" />
-    <ClInclude Include="Source\Chip8\Interfaces\IInterpreterShell.hpp" />
-    <ClInclude Include="Source\Chip8\Interpreter.hpp" />
-    <ClInclude Include="Source\Chip8\InterpreterSFML.hpp" />
+    <ClInclude Include="Source\Chip8\Emulator.hpp" />
+    <ClInclude Include="Source\Chip8\Interfaces\IEmulator.hpp" />
+    <ClInclude Include="Source\Chip8\Interfaces\IEmulatorShell.hpp" />
+    <ClInclude Include="Source\Chip8\EmulatorSFML.hpp" />
     <ClInclude Include="Source\Chip8\State.hpp" />
     <ClInclude Include="Source\Chip8\Storage.hpp" />
   </ItemGroup>

@@ -6,7 +6,7 @@
 
 namespace Chip8
 {
-    class IInterpreter
+    class IEmulator
     {
     public:
         virtual void Open(const std::string& rom) = 0;
