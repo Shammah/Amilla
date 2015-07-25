@@ -16,11 +16,14 @@ namespace Chip8
     public:
         virtual ~IEmulatorShell() {};
 
+    protected:
+        virtual void Tick() = 0;
+
+    public:
         virtual const std::shared_ptr<IEmulator> GetEmulator() const = 0;
         virtual const std::unordered_map<KeyType, uint8_t>& GetKeyMapping() = 0;
 
         virtual void Start() = 0;
-        virtual void Tick() = 0;
         virtual void Stop() = 0;
     };
 }

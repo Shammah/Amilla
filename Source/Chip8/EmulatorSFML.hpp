@@ -39,13 +39,13 @@ namespace Chip8
     protected:
         void ProcessEvents();
         void Draw();
+        virtual void Tick() override;
 
     public:
         virtual const std::unordered_map<sf::Keyboard::Key, uint8_t>& GetKeyMapping() override { return _keyMapping; }
         virtual const std::shared_ptr<IEmulator> GetEmulator() const override { return _emulator; };
 
         virtual void Start() override;
-        virtual void Tick();
         virtual void Stop() override;
     };
 }
