@@ -11,6 +11,8 @@ namespace Chip8
     public:
         static constexpr uint8_t WIDTH = 64;
         static constexpr uint8_t HEIGHT = 32;
+        static constexpr uint8_t BYTES_PER_SPRITE = 5;
+        static constexpr uint16_t FONT_MEMORY_SIZE = 16 * BYTES_PER_SPRITE;
 
     public:
         Display();
@@ -21,7 +23,7 @@ namespace Chip8
          * Each font character (0 .. F) is 5 * 8bit pixels.
          * So its height is 5 rows of pixels.
          */
-        std::array<uint8_t, 16 * 5> Font;
+        std::array<uint8_t, FONT_MEMORY_SIZE> Font;
 
         /** The actual screen containing the pixels to render. */
         std::array<uint8_t, WIDTH * HEIGHT / 8> Pixels;

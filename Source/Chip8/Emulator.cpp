@@ -65,6 +65,12 @@ void Emulator::Open(const string& rom)
         _storage.RAM[i++] = file.get();
 
     _state.PC = START;
+
+    // Copy over the installed font into memory. This is such that
+    // the I register can have a pointer to font memory.
+    auto fontBase = _storage.RAM.begin();
+    std::advance(fontBase, FONT_BASE);
+    std::copy_n(_display.Font.begin(), _display.FONT_MEMORY_SIZE, fontBase);
 }
 
 Emulator::Opcode Emulator::Fetch()
@@ -350,7 +356,8 @@ void Emulator::AddI()
 
 void Emulator::FX29()
 {
-    throw exception("Not implemented yet!");
+    GET_Vx();
+    _state.I = FONT_BASE + (Vx & 0xf) * _display.BYTES_PER_SPRITE;
 }
 
 void Emulator::FX33()

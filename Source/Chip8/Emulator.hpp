@@ -33,6 +33,10 @@ namespace Chip8
     public:
         /** Starting location in memory of loaded programs. */
         static constexpr State::addr_t START = 0x200;
+
+        /** Starting location in memory to install the font to. */
+        static constexpr uint16_t FONT_BASE = 0;
+
         static constexpr uint8_t NUM_MAIN_OPCODES = 0x10;
         static constexpr uint8_t NUM_ARITH_OPCODES = 0x9;
 
