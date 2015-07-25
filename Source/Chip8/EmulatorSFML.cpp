@@ -21,6 +21,20 @@ void EmulatorSFML::Start()
 void EmulatorSFML::Tick()
 {
     // Process events
+    ProcessEvents();
+
+    _emulator->Tick();
+
+    Draw();
+}
+
+void EmulatorSFML::Stop()
+{
+    _window->close();
+}
+
+void EmulatorSFML::ProcessEvents()
+{
     sf::Event event;
     while (_window->pollEvent(event))
     {
@@ -49,17 +63,11 @@ void EmulatorSFML::Tick()
             break;
         }
     }
-
-    _emulator->Tick();
-
-    // Clear screen
-    _window->clear();
-
-    // Update the window
-    _window->display();
 }
 
-void EmulatorSFML::Stop()
+void EmulatorSFML::Draw()
 {
-    _window->close();
+    _window->clear();
+
+    _window->display();
 }

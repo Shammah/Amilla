@@ -36,6 +36,11 @@ namespace Chip8
         EmulatorSFML(std::shared_ptr<IEmulator> emulator);
         virtual ~EmulatorSFML();
 
+    protected:
+        void ProcessEvents();
+        void Draw();
+
+    public:
         virtual const std::unordered_map<sf::Keyboard::Key, uint8_t>& GetKeyMapping() override { return _keyMapping; }
         virtual const std::shared_ptr<IEmulator> GetEmulator() const override { return _emulator; };
 
