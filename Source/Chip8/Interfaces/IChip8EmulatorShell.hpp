@@ -2,7 +2,8 @@
 
 #include <memory>
 #include <unordered_map>
-#include "IEmulator.hpp"
+#include "IChip8Emulator.hpp"
+#include "Interfaces/IEmulatorShell.hpp"
 
 namespace Chip8
 {
@@ -11,16 +12,16 @@ namespace Chip8
      * with the outside world; display, sound, input etc.
      */
     template <class KeyType>
-    class IEmulatorShell
+    class IChip8EmulatorShell : public Amilla::IEmulatorShell<IChip8Emulator>
     {
     public:
-        virtual ~IEmulatorShell() {};
+        virtual ~IChip8EmulatorShell() {};
 
     protected:
         virtual void Tick() = 0;
 
     public:
-        virtual const std::shared_ptr<IEmulator> GetEmulator() const = 0;
+        virtual const std::shared_ptr<IChip8Emulator> GetEmulator() const = 0;
         virtual const std::unordered_map<KeyType, uint8_t>& GetKeyMapping() = 0;
 
         virtual void Start() = 0;

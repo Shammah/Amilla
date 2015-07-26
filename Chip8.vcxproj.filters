@@ -42,17 +42,17 @@
     <ClInclude Include="Source\Chip8\Storage.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Chip8\Interfaces\IEmulatorShell.hpp">
-      <Filter>Source\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Chip8\Interfaces\IEmulator.hpp">
-      <Filter>Source\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Chip8\Emulator.hpp">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\Chip8\EmulatorSFML.hpp">
       <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Chip8\Interfaces\IChip8Emulator.hpp">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Chip8\Interfaces\IChip8EmulatorShell.hpp">
+      <Filter>Source\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

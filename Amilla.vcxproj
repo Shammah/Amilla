@@ -125,6 +125,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Amilla\Interfaces\IEmulator.hpp" />
+    <ClInclude Include="Source\Amilla\Interfaces\IEmulatorShell.hpp" />
     <ClInclude Include="Source\Amilla\Interfaces\IResettable.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

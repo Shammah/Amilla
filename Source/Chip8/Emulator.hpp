@@ -2,10 +2,10 @@
 
 #include <assert.h>
 #include <string>
-#include "Interfaces/IEmulator.hpp"
 #include "Display.hpp"
 #include "Storage.hpp"
 #include "State.hpp"
+#include "Interfaces/IChip8Emulator.hpp"
 
 #define GET_Vx() \
     auto& Vx = _state.V[_opcode.x]; \
@@ -27,7 +27,7 @@ namespace Chip8
      * into a machine, and execute it's state machine.
      * This class is essentially the 'CPU'.
      */
-    class Emulator : public IEmulator
+    class Emulator : public IChip8Emulator
     {
     public:
         /** Starting location in memory of loaded programs. */

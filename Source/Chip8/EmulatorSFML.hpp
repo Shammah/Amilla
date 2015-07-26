@@ -2,14 +2,14 @@
 
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
-#include "Interfaces/IEmulatorShell.hpp"
+#include "Interfaces/IChip8EmulatorShell.hpp"
 
 namespace Chip8
 {
-    class EmulatorSFML : public IEmulatorShell<sf::Keyboard::Key>
+    class EmulatorSFML : public IChip8EmulatorShell<sf::Keyboard::Key>
     {
     private:
-        std::shared_ptr<IEmulator> _emulator;
+        std::shared_ptr<IChip8Emulator> _emulator;
         std::unique_ptr<sf::RenderWindow> _window;
 
         sf::Sprite _display;
@@ -36,7 +36,7 @@ namespace Chip8
         };
 
     public:
-        EmulatorSFML(std::shared_ptr<IEmulator> emulator);
+        EmulatorSFML(std::shared_ptr<IChip8Emulator> emulator);
         virtual ~EmulatorSFML();
 
     protected:
@@ -47,7 +47,7 @@ namespace Chip8
 
     public:
         virtual const std::unordered_map<sf::Keyboard::Key, uint8_t>& GetKeyMapping() override { return _keyMapping; }
-        virtual const std::shared_ptr<IEmulator> GetEmulator() const override { return _emulator; };
+        virtual const std::shared_ptr<IChip8Emulator> GetEmulator() const override { return _emulator; };
 
         virtual void Start() override;
         virtual void Stop() override;

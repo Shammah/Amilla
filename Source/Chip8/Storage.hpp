@@ -13,7 +13,7 @@ namespace Chip8
      * into a union with the enitre memory itself. However, this made it difficult
      * to extend, as unions and non-POD members don't go that well together.
      */
-    class Storage : public IResettable
+    class Storage : public Amilla::IResettable
     {
     public:
         typedef uint8_t byte_t;

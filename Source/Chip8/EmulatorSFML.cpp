@@ -1,8 +1,8 @@
 #include "EmulatorSFML.hpp"
 using namespace Chip8;
 
-EmulatorSFML::EmulatorSFML(std::shared_ptr<IEmulator> emulator)
-    : _window(std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(800, 600), "Shammah's Chip8 Emulator")))
+EmulatorSFML::EmulatorSFML(std::shared_ptr<IChip8Emulator> emulator)
+    : _window(std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(640, 320), "Shammah's Chip8 Emulator")))
 {
     _emulator = emulator;
 }

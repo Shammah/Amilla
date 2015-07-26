@@ -6,7 +6,7 @@
 
 namespace Chip8
 {
-    class Display : public IResettable
+    class Display : public Amilla::IResettable
     {
     public:
         static constexpr uint8_t WIDTH = 64;

@@ -16,5 +16,11 @@
     <ClInclude Include="Source\Amilla\Interfaces\IResettable.hpp">
       <Filter>Source\Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Amilla\Interfaces\IEmulator.hpp">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Amilla\Interfaces\IEmulatorShell.hpp">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

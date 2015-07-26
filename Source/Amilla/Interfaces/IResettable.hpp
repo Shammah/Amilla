@@ -1,8 +1,11 @@
 #pragma once
 
-class IResettable
+namespace Amilla
 {
-public:
-    virtual ~IResettable() {};
-    virtual void Reset() = 0;
-};
+    class IResettable
+    {
+    public:
+        virtual ~IResettable() {};
+        virtual void Reset() = 0;
+    };
+}

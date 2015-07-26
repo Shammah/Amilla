@@ -21,8 +21,8 @@
   <ItemGroup>
     <ClInclude Include="Source\Chip8\Display.hpp" />
     <ClInclude Include="Source\Chip8\Emulator.hpp" />
-    <ClInclude Include="Source\Chip8\Interfaces\IEmulator.hpp" />
-    <ClInclude Include="Source\Chip8\Interfaces\IEmulatorShell.hpp" />
+    <ClInclude Include="Source\Chip8\Interfaces\IChip8Emulator.hpp" />
+    <ClInclude Include="Source\Chip8\Interfaces\IChip8EmulatorShell.hpp" />
     <ClInclude Include="Source\Chip8\EmulatorSFML.hpp" />
     <ClInclude Include="Source\Chip8\State.hpp" />
     <ClInclude Include="Source\Chip8\Storage.hpp" />
