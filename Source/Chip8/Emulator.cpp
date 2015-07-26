@@ -4,6 +4,7 @@ using namespace std;
 using namespace Chip8;
 
 Emulator::Emulator()
+    : _loaded(false)
 {
     _mainOpcodeTable =
     {
@@ -56,7 +57,7 @@ void Emulator::Reset()
     _display.Reset();
 }
 
-void Emulator::Open(const string& rom)
+void Emulator::LoadFromFile(const string& rom)
 {
     ifstream file(rom, std::ios::binary);
     int i = START;
@@ -64,6 +65,24 @@ void Emulator::Open(const string& rom)
     while (file.good() && i < _storage.RAM_SIZE)
         _storage.RAM[i++] = file.get();
 
+    _loaded = true;
+    Init();
+}
+
+void Emulator::LoadFromMemory(const uint8_t* const code, size_t size)
+{
+    assert(size <= _storage.RAM_SIZE - 0x200);
+
+    auto programLocation = _storage.RAM.begin();
+    std::advance(programLocation, START);
+    std::copy_n(code, size, programLocation);
+
+    _loaded = true;
+    Init();
+}
+
+void Emulator::Init()
+{
     _state.PC = START;
 
     // Copy over the installed font into memory. This is such that
@@ -71,6 +90,11 @@ void Emulator::Open(const string& rom)
     auto fontBase = _storage.RAM.begin();
     std::advance(fontBase, FONT_BASE);
     std::copy_n(_display.Font.begin(), _display.FONT_MEMORY_SIZE, fontBase);
+}
+
+bool Emulator::IsLoaded() const
+{
+    return _loaded;
 }
 
 Emulator::Opcode Emulator::Fetch()

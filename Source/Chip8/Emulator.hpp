@@ -75,6 +75,8 @@ namespace Chip8
         std::array<Operation, NUM_MAIN_OPCODES> _mainOpcodeTable;
         std::array<Operation, NUM_ARITH_OPCODES> _arithOpcodeTable;
 
+        bool _loaded;
+
     private:
         /**
          * Fetch next opcode and increment PC.
@@ -83,9 +85,15 @@ namespace Chip8
          */
         Opcode Fetch();
 
+    protected:
+        virtual void Init();
+
     public:
-        virtual void Open(const std::string& rom) override;
+        virtual void LoadFromMemory(uint8_t const * const code, const size_t size) override;
+        virtual void LoadFromFile(const std::string& rom) override;
+        virtual bool IsLoaded() const override;
         virtual void Tick() override;
+
         virtual void Reset() override;
 
         virtual const Storage& GetStorage() const override { return _storage; }
