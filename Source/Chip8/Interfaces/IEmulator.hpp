@@ -3,10 +3,11 @@
 #include "Display.hpp"
 #include "State.hpp"
 #include "Storage.hpp"
+#include "Interfaces/IResettable.hpp"
 
 namespace Chip8
 {
-    class IEmulator
+    class IEmulator : public IResettable
     {
     public:
         /**

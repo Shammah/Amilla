@@ -3,7 +3,6 @@
 #include <assert.h>
 #include <string>
 #include "Interfaces/IEmulator.hpp"
-#include "Interfaces/IResettable.hpp"
 #include "Display.hpp"
 #include "Storage.hpp"
 #include "State.hpp"
@@ -28,7 +27,7 @@ namespace Chip8
      * into a machine, and execute it's state machine.
      * This class is essentially the 'CPU'.
      */
-    class Emulator : public IResettable, public IEmulator
+    class Emulator : public IEmulator
     {
     public:
         /** Starting location in memory of loaded programs. */
