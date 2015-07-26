@@ -69,11 +69,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)\Build\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Build\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>Obj\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)\Build\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Build\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>Obj\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -81,7 +81,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Catch/include;$(SolutionDir)/Source/Amilla/;$(SolutionDir)/Source/Chip8</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Catch/include;$(SolutionDir)/di/include;$(SolutionDir)/Source/Amilla</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -104,7 +104,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Catch/include;$(SolutionDir)/Source/Amilla/;$(SolutionDir)/Source/Chip8</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Catch/include;$(SolutionDir)/di/include;$(SolutionDir)/Source/Amilla</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -129,6 +129,11 @@
   <ItemGroup>
     <ClCompile Include="Test\Chip8.cpp" />
     <ClCompile Include="Test\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Chip8.vcxproj">
+      <Project>{67da2108-5a99-4edd-9c18-3fc781deb138}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

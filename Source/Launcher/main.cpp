@@ -1,7 +1,7 @@
 #include <memory>
 #include "boost/di.hpp"
-#include "Emulator.hpp"
-#include "EmulatorSFML.hpp"
+#include "../Chip8/Emulator.hpp"
+#include "../Chip8/EmulatorSFML.hpp"
 using namespace Chip8;
 namespace di = boost::di;
 
