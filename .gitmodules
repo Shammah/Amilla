@@ -1,0 +1,3 @@
+[submodule "di"]
+	path = di
+	url = https://github.com/krzysztof-jusiak/di.git

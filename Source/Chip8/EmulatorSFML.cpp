@@ -23,7 +23,8 @@ void EmulatorSFML::Tick()
     // Process events
     ProcessEvents();
 
-    _emulator->Tick();
+    if (_emulator->IsLoaded())
+        _emulator->Tick();
 
     Draw();
 }
