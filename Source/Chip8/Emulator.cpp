@@ -111,8 +111,8 @@ Emulator::Opcode Emulator::Fetch()
     opcode.n    = op & 0xF;
     opcode.nn   = op & 0xFF;
     opcode.nnn  = op & 0xFFF;
-    opcode.x    = (op >> 4) & 0xF;
-    opcode.y    = (op >> 8) & 0xF;
+    opcode.x    = (op >> 8) & 0xF;
+    opcode.y    = (op >> 4) & 0xF;
 
     return opcode;
 }
