@@ -12,6 +12,9 @@ namespace Chip8
         std::shared_ptr<IEmulator> _emulator;
         std::unique_ptr<sf::RenderWindow> _window;
 
+        sf::Sprite _display;
+        sf::Texture _displayTex;
+
         std::unordered_map<sf::Keyboard::Key, uint8_t> _keyMapping =
         {
             { sf::Keyboard::Num0, 0x0 },
@@ -39,6 +42,7 @@ namespace Chip8
     protected:
         void ProcessEvents();
         void Draw();
+        void RenderDisplay();
         virtual void Tick() override;
 
     public:

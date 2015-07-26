@@ -68,6 +68,40 @@ void EmulatorSFML::ProcessEvents()
 void EmulatorSFML::Draw()
 {
     _window->clear();
-
+    RenderDisplay();
+    _window->draw(_display);
     _window->display();
+}
+
+void EmulatorSFML::RenderDisplay()
+{
+    /**
+     * Each 'pixel' in the Chip8 emulator is a byte,
+     * which actualy holds 8 pixels for the real screen.
+     * Thus, every bit on (1) must be converted into a
+     * white 32 bit pixel, and black if it's off (0).
+     *
+     * Pixels in SFML are RGBA, so each pixel needs 4 bytes.
+     */
+    std::array<uint8_t, Display::WIDTH * Display::HEIGHT * 4> buffer;
+    auto buffer_it = buffer.begin();
+
+    for (auto& pixels : _emulator->GetDisplay().Pixels)
+    {
+        // Each Chip8 pixel consists of 8 bits, which are the actual pixels.
+        uint8_t mask = 0b10000000;
+        for (int i = 0; i < 8; i++)
+        {
+            if ((pixels & mask) == mask)
+                for (int j = 0; j < 4; j++)
+                    *(buffer_it++) = 255;
+            else
+                for (int j = 0; j < 4; j++)
+                    *(buffer_it++) = 0;
+
+            mask >>= 1;
+        }
+    }
+
+    _displayTex.update(buffer.data());
 }
