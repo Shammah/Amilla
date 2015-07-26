@@ -14,6 +14,24 @@ SCENARIO("Testing various Chip8 implementations")
         ).create<std::unique_ptr<IChip8Emulator>>()
     })
     {
-        REQUIRE(chip8->IsLoaded() == false);
+        GIVEN("An emulator instance")
+        {
+            REQUIRE(chip8->IsLoaded() == false);
+
+            WHEN("Testing opcodes")
+            {
+                WHEN("6XNN")
+                {
+                    uint8_t code[] = { 0x63, 0x42 };
+                    chip8->LoadFromMemory(code, 2);
+
+                    auto& state = chip8->GetState();
+                    REQUIRE(state.V[0x3] == 0);
+
+                    chip8->Tick();
+                    REQUIRE(state.V[0x3] == 0x42);
+                }
+            }
+        }
     }
 }
