@@ -69,7 +69,7 @@ void Emulator::LoadFromFile(const string& rom)
     Init();
 }
 
-void Emulator::LoadFromMemory(const uint8_t* const code, size_t size)
+void Emulator::LoadFromMemory(const uint8_t* const code, const size_t size)
 {
     assert(size <= _storage.RAM_SIZE - 0x200);
 
