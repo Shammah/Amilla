@@ -5,6 +5,10 @@ EmulatorSFML::EmulatorSFML(std::shared_ptr<IChip8Emulator> emulator)
     : _window(std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(640, 320), "Shammah's Chip8 Emulator")))
 {
     _emulator = emulator;
+
+    _displayTex.create(Display::WIDTH, Display::HEIGHT);
+    _display = sf::Sprite(_displayTex);
+    _display.setScale(10, 10);
 }
 
 EmulatorSFML::~EmulatorSFML()
@@ -87,21 +91,15 @@ void EmulatorSFML::RenderDisplay()
     std::array<uint8_t, Display::WIDTH * Display::HEIGHT * 4> buffer;
     auto buffer_it = buffer.begin();
 
-    for (auto& pixels : _emulator->GetDisplay().Pixels)
+    for (auto& pixel : _emulator->GetDisplay().Pixels)
     {
         // Each Chip8 pixel consists of 8 bits, which are the actual pixels.
-        uint8_t mask = 0b10000000;
-        for (int i = 0; i < 8; i++)
-        {
-            if ((pixels & mask) == mask)
-                for (int j = 0; j < 4; j++)
-                    *(buffer_it++) = 255;
-            else
-                for (int j = 0; j < 4; j++)
-                    *(buffer_it++) = 0;
-
-            mask >>= 1;
-        }
+        if (pixel)
+            for (int j = 0; j < 4; j++)
+                *(buffer_it++) = 255;
+        else
+            for (int j = 0; j < 4; j++)
+                *(buffer_it++) = 0;
     }
 
     _displayTex.update(buffer.data());

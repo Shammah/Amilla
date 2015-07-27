@@ -26,7 +26,7 @@ namespace Chip8
         std::array<uint8_t, FONT_MEMORY_SIZE> Font;
 
         /** The actual screen containing the pixels to render. */
-        std::array<uint8_t, WIDTH * HEIGHT / 8> Pixels;
+        std::array<bool, WIDTH * HEIGHT> Pixels;
 
     public:
         void Reset() override;
