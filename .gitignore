@@ -1,5 +1,3 @@
-.vs/**
-Build/*
-Obj/*
-*.sdf
-*.opensdf
+bin/
+build/
+CMakeLists.txt.user
