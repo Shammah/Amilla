@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <fstream>
 #include "Emulator.hpp"
 using namespace std;
@@ -140,7 +141,7 @@ void Emulator::Special()
 
 void Emulator::Call()
 {
-    throw exception("Not implemented yet!");
+    throw runtime_error("Not implemented yet!");
 }
 
 void Emulator::Clear()
@@ -341,7 +342,7 @@ void Emulator::Key()
     else if (_opcode.nn == 0xA1)
         SkipKeyNotPressed();
     else
-        throw exception("Unknown opcode!");
+        throw runtime_error("Unknown opcode!");
 }
 
 void Emulator::SkipKeyPressed()
@@ -371,7 +372,7 @@ void Emulator::Advanced()
     case 0x33: FX33(); break;
     case 0x55: FX55(); break;
     case 0x65: FX65(); break;
-    default: throw exception("Unknown opcode!");
+    default: throw runtime_error("Unknown opcode!");
     }
 }
 
@@ -383,7 +384,7 @@ void Emulator::LoadDelayTimer()
 
 void Emulator::WaitKey()
 {
-    throw exception("Not implemented yet!");
+    throw runtime_error("Not implemented yet!");
 }
 
 void Emulator::SetDelayTimer()
@@ -412,15 +413,15 @@ void Emulator::FX29()
 
 void Emulator::FX33()
 {
-    throw exception("Not implemented yet!");
+    throw runtime_error("Not implemented yet!");
 }
 
 void Emulator::FX55()
 {
-    throw exception("Not implemented yet!");
+    throw runtime_error("Not implemented yet!");
 }
 
 void Emulator::FX65()
 {
-    throw exception("Not implemented yet!");
+    throw runtime_error("Not implemented yet!");
 }
