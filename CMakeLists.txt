@@ -4,7 +4,6 @@ project(Chip8)
 
 # Include library headers.
 include_directories("lib/di/include")
-include_directories("lib/sfml/include")
 
 # Include our own headers.
 include_directories("include")
@@ -22,8 +21,16 @@ set(SOURCE_FILES
     src/Chip8/Storage.cpp
     src/Launcher/main.cpp)
 
-add_executable(Chip8 ${SOURCE_FILES})
+set(EXECUTABLE_NAME Chip8)
+add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
 
 # Add header files as custom target so they show up in the project file structure in the IDE.
 FILE(GLOB_RECURSE HEADER_FILES "include/*.hpp")
 add_custom_target(headers SOURCES ${HEADER_FILES})
+
+# Add SFML dependency.
+find_package(SFML 2 REQUIRED system window graphics)
+if(SFML_FOUND)
+  include_directories(${SFML_INCLUDE_DIR})
+  target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+endif()
