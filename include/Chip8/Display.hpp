@@ -2,7 +2,7 @@
 
 #include <array>
 #include <stdint.h>
-#include "Interfaces/IResettable.hpp"
+#include "Amilla/IResettable.hpp"
 
 namespace Chip8
 {

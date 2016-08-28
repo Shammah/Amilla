@@ -1,6 +1,6 @@
-[submodule "di"]
-	path = di
+[submodule "lib/di"]
+	path = lib/di
 	url = https://github.com/krzysztof-jusiak/di.git
-[submodule "Catch"]
-	path = Catch
+[submodule "lib/catch"]
+	path = lib/catch
 	url = https://github.com/philsquared/Catch.git

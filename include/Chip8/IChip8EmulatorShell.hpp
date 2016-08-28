@@ -3,7 +3,7 @@
 #include <memory>
 #include <unordered_map>
 #include "IChip8Emulator.hpp"
-#include "Interfaces/IEmulatorShell.hpp"
+#include "Amilla/IEmulatorShell.hpp"
 
 namespace Chip8
 {

@@ -2,10 +2,10 @@
 
 #include <assert.h>
 #include <string>
+#include "IChip8Emulator.hpp"
 #include "Display.hpp"
 #include "Storage.hpp"
 #include "State.hpp"
-#include "Interfaces/IChip8Emulator.hpp"
 
 #define GET_Vx() \
     auto& Vx = _state.V[_opcode.x]; \
@@ -121,7 +121,7 @@ namespace Chip8
         /* 5XY0	*/ void SkipEqualsReg();        /* Skip the following instruction if the value of register VX is equal to the value of register VY. */
         /* 6XNN	*/ void StoreNN();              /* Store number NN in register VX. */
         /* 7XNN	*/ void AddNN();                /* Add the value NN to register VX. */
-        
+
         /* 8    */ void Arithmetic();           /* Call any of the arithmetic functions. */
         /* 8XY0 */ void Store();                /* Store the value of register VY in register VX. */
         /* 8XY1 */ void Or();                   /* Set VX to VX OR VY. */

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "IChip8EmulatorShell.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
-#include "Interfaces/IChip8EmulatorShell.hpp"
 
 namespace Chip8
 {

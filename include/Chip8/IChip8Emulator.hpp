@@ -3,7 +3,7 @@
 #include "Display.hpp"
 #include "State.hpp"
 #include "Storage.hpp"
-#include "Interfaces/IEmulator.hpp"
+#include "Amilla/IEmulator.hpp"
 
 namespace Chip8
 {
