@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Amilla.Chip8.Domain.Interfaces;
+using Amilla.Chip8.Domain.SeedWork;
 
 namespace Amilla.Chip8.Domain
 {
@@ -19,7 +20,7 @@ namespace Amilla.Chip8.Domain
     /// We do use the first 512 KiB for the <see cref="Display.Font"/> however. This is so that
     /// the machine's <see cref="State.I"/> register can point to the font memory.
     /// </summary>
-    public class Memory : IResettable, IEquatable<Memory>, IEnumerable<byte>
+    public class Memory : ValueObject, IResettable, IEnumerable<byte>
     {
         /// <summary>
         /// Total size of the memory in bytes.
@@ -93,27 +94,10 @@ namespace Amilla.Chip8.Domain
             Array.Clear(this.RAM, 0, RAMSize);
         }
 
-        #region Equality
-
-        public override int GetHashCode() => this.RAM.GetHashCode();
-        public override bool Equals(object obj) => Equals(obj as Memory);
-        public bool Equals(Memory other)
+        protected override IEnumerable<object> GetAtomicValues()
         {
-            if (ReferenceEquals(other, null))
-                return false;
-
-            if (ReferenceEquals(this, other))
-                return true;
-
-            if (GetType() != other.GetType())
-                return false;
-
-            return this.RAM.SequenceEqual(other.RAM);
+            foreach (var mem in RAM)
+                yield return mem;
         }
-
-        public static bool operator ==(Memory lhs, Memory rhs) => lhs.Equals(rhs);
-        public static bool operator !=(Memory lhs, Memory rhs) => !(lhs == rhs);
-
-        #endregion
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Amilla.Chip8.Domain.Interfaces;
+using Amilla.Chip8.Domain.SeedWork;
 
 namespace Amilla.Chip8.Domain
 {
@@ -14,7 +15,7 @@ namespace Amilla.Chip8.Domain
     /// Thus, every bit on (1) must be converted into a
     /// white 32 bit pixel, and black if it's off (0).
     /// </summary>
-    public class Display : IResettable, IEnumerable<bool>
+    public class Display : ValueObject, IResettable, IEnumerable<bool>
     {
         public const int Width = 64;
         public const int Height = 32;
@@ -74,6 +75,12 @@ namespace Amilla.Chip8.Domain
                 0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
                 0xF0, 0x80, 0xF0, 0x80, 0x80  // F
             };
+        }
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            foreach (var pixel in Pixels)
+                yield return pixel;
         }
     }
 }

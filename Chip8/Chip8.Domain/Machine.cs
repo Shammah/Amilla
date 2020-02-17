@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Amilla.Chip8.Domain.Interfaces;
+using Amilla.Chip8.Domain.SeedWork;
 
 namespace Amilla.Chip8.Domain
 {
@@ -10,7 +11,7 @@ namespace Amilla.Chip8.Domain
     /// An actual Chip8 machine emulator.
     /// Basically a face class; it contains all various machine components.
     /// </summary>
-    public class Machine : IChip8Emulator
+    public class Machine : ValueObject, IChip8Emulator
     {
         public Machine()
         {
@@ -79,6 +80,15 @@ namespace Amilla.Chip8.Domain
 
             var rom = File.ReadAllBytes(file.FullName).ToArray();
             LoadFromMemory(rom);
+        }
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return this.State;
+            yield return this.CPU;
+            yield return this.Display;
+            yield return this.Memory;
+            yield return this.IsLoaded;
         }
     }
 }

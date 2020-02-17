@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Amilla.Chip8.Domain.Exceptions;
+using Amilla.Chip8.Domain.SeedWork;
 
 namespace Amilla.Chip8.Domain
 {
     /// <summary>
     /// The one and only class that reads executes operations.
     /// </summary>
-    public class CPU
+    public class CPU : ValueObject
     {
         private readonly Action[] mainOpcodeTable;
         private readonly Action[] arithOpcodeTable;
@@ -586,5 +588,14 @@ namespace Amilla.Chip8.Domain
         }
 
         #endregion
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return this.State;
+            yield return this.Memory;
+            yield return this.Display;
+            yield return this.opcode;
+            yield return this.WaitingForKey;
+        }
     }
 }

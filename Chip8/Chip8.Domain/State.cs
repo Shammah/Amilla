@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using Amilla.Chip8.Domain.Interfaces;
+using Amilla.Chip8.Domain.SeedWork;
 
 namespace Amilla.Chip8.Domain
 {
@@ -17,7 +18,7 @@ namespace Amilla.Chip8.Domain
     /// sound timers. When these registers are non-zero, they are automatically
     /// decremented at a rate of 60Hz.
     /// </summary
-    public class State : IResettable, IEquatable<State>
+    public class State : ValueObject, IResettable
     {
         public const int NumRegisters = 16;
         public const int NumKeys = 16;
@@ -96,45 +97,22 @@ namespace Amilla.Chip8.Domain
             return randomByte[0];
         }
 
-        #region Equality
-
-        public override int GetHashCode() => new
+        protected override IEnumerable<object> GetAtomicValues()
         {
-            this.V,
-            this.I,
-            this.DelayTimer,
-            this.SoundTimer,
-            this.PC,
-            this.SP,
-            this.Stack,
-            this.Keys
-        }.GetHashCode();
+            yield return this.I;
+            yield return this.DelayTimer;
+            yield return this.SoundTimer;
+            yield return this.PC;
+            yield return this.SP;
 
-        public override bool Equals(object obj) => Equals(obj as State);
-        public bool Equals(State other)
-        {
-            if (ReferenceEquals(other, null))
-                return false;
+            foreach (var v in this.V)
+                yield return v;
 
-            if (ReferenceEquals(this, other))
-                return true;
+            foreach (var mem in this.Stack)
+                yield return mem;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return this.I == other.I
-                && this.DelayTimer == other.DelayTimer
-                && this.SoundTimer == other.SoundTimer
-                && this.PC == other.PC
-                && this.SP == other.SP
-                && this.V.SequenceEqual(other.V)
-                && this.Stack.SequenceEqual(other.Stack)
-                && this.Keys.SequenceEqual(other.Keys);
+            foreach (var key in this.Keys)
+                yield return key;
         }
-
-        public static bool operator ==(State lhs, State rhs) => lhs.Equals(rhs);
-        public static bool operator !=(State lhs, State rhs) => !(lhs == rhs);
-
-        #endregion
     }
 }

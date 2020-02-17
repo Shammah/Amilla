@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using Amilla.Chip8.Domain.SeedWork;
 
 namespace Amilla.Chip8.Domain
 {
@@ -13,7 +14,7 @@ namespace Amilla.Chip8.Domain
     /// If a program includes sprite data, it should be padded so any instructions following
     /// it will be properly situated in RAM.
     /// </summary>
-    public struct Opcode : IEquatable<Opcode>, IEquatable<ushort>
+    public class Opcode : ValueObject
     {
         public Opcode(ushort op)
         {
@@ -63,16 +64,9 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         public byte N => (byte)(this.NNNN & 0xF);
 
-        #region Equality
-
-        public override int GetHashCode() => this.NNNN.GetHashCode();
-        public override bool Equals(object obj) => Equals((Opcode)obj);
-        public bool Equals(Opcode other) => this.NNNN == other.NNNN;
-        public bool Equals(ushort other) => this.NNNN == other;
-
-        public static bool operator ==(Opcode lhs, Opcode rhs) => lhs.Equals(rhs);
-        public static bool operator !=(Opcode lhs, Opcode rhs) => !(lhs == rhs);
-
-        #endregion
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return this.NNNN;
+        }
     }
 }
