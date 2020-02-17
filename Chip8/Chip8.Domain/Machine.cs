@@ -12,8 +12,6 @@ namespace Amilla.Chip8.Domain
     /// </summary>
     public class Machine : IChip8Emulator
     {
-        private bool isLoaded;
-
         public Machine()
         {
             this.Memory = new Memory();
@@ -24,7 +22,7 @@ namespace Amilla.Chip8.Domain
                 this.State,
                 this.Display);
 
-            this.isLoaded = false;
+            this.IsLoaded = false;
         }
 
         public Memory Memory { get; }
@@ -32,11 +30,7 @@ namespace Amilla.Chip8.Domain
         public Display Display { get; }
         public CPU CPU { get; }
 
-        public bool IsLoaded
-        {
-            get => this.isLoaded;
-            private set => this.isLoaded = value;
-        }
+        public bool IsLoaded { get; private set; }
         
         private void Init()
         {
@@ -68,7 +62,7 @@ namespace Amilla.Chip8.Domain
         public void LoadFromMemory(byte[] rom)
         {
             this.Memory.LoadProgram(rom);
-            this.isLoaded = true;
+            this.IsLoaded = true;
 
             Init();
         }
