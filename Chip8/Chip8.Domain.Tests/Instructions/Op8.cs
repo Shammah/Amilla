@@ -103,13 +103,13 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
             chip8.LoadFromMemory(program);
             chip8.State.V[0x0] = 0x0F;
             chip8.State.V[0x1] = 0x0A;
-            chip8.State.V[0xF] = 0x1;
+            chip8.State.V[0xF] = 0x0;
 
             // Run one instruction.
             chip8.Tick();
 
             Assert.Equal(0x0F - 0x0A, chip8.State.V[0x0]);
-            Assert.Equal(0x0, chip8.State.V[0xF]);
+            Assert.Equal(0x1, chip8.State.V[0xF]);
         }
 
         [Fact]
@@ -119,13 +119,13 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
             chip8.LoadFromMemory(program);
             chip8.State.V[0x0] = 0x0A;
             chip8.State.V[0x1] = 0x0F;
-            chip8.State.V[0xF] = 0x0;
+            chip8.State.V[0xF] = 0x1;
 
             // Run one instruction.
             chip8.Tick();
 
             Assert.NotEqual(0x0F - 0x0A, chip8.State.V[0x0]);
-            Assert.Equal(0x1, chip8.State.V[0xF]);
+            Assert.Equal(0x0, chip8.State.V[0xF]);
         }
 
         [Fact]

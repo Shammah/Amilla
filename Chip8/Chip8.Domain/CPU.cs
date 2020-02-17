@@ -318,7 +318,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Sub()
         {
-            VF = (byte)(Vy > Vx ? 1 : 0);
+            VF = (byte)(Vy > Vx ? 0 : 1);
             Vx -= Vy;
         }
 
