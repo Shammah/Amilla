@@ -12,10 +12,10 @@ namespace Amilla.Chip8.MonoGame
         public const int Width = 640;
         public const int Height = 480;
 
-        private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
-        private IDictionary<Keys, int> keyMapping;
+        private readonly GraphicsDeviceManager graphics;
+        private readonly IDictionary<Keys, int> keyMapping;
 
+        private SpriteBatch spriteBatch;
         private Texture2D chip8Texture;
 
         private bool isRunning;
