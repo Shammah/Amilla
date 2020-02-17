@@ -4,7 +4,7 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
 {
     public class OpA
     {
-        private Machine chip8;
+        private readonly Machine chip8;
 
         public OpA()
         {
