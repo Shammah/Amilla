@@ -1,6 +1,0 @@
-[submodule "di"]
-	path = di
-	url = https://github.com/krzysztof-jusiak/di.git
-[submodule "Catch"]
-	path = Catch
-	url = https://github.com/philsquared/Catch.git
