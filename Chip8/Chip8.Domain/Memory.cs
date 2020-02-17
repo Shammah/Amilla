@@ -16,7 +16,7 @@ namespace Amilla.Chip8.Domain
     /// However, we dont have memory limitations, and thuse store the <see cref="State"/>
     /// at a different location. Hence, when using <see cref="Reset"/>, the state wont be reset.
     /// 
-    /// We do use the first 512 KiB for the <see cref="Display.Font"/> however. This is so that
+    /// We do use the first 512 KiB for the <see cref="Display"/> font however. This is so that
     /// the machine's <see cref="State.I"/> register can point to the font memory.
     /// </summary>
     public class Memory : ValueObject, IEnumerable<byte>

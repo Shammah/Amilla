@@ -70,8 +70,8 @@ namespace Amilla.Chip8.Domain
         public bool WaitingForKey { get; set; }
 
         /// <summary>
-        /// Fetches the next <see cref="Opcode"/> from the <see cref="this.Memory"/>.
-        /// This increments <see cref="this.State.PC"/> by 2.
+        /// Fetches the next <see cref="Opcode"/> from the <see cref="Memory"/>.
+        /// This increments <see cref="State.PC"/> by 2.
         /// </summary>
         /// <returns>The newly fetched <see cref="Opcode"/> to execute.</returns>
         public Opcode Fetch()
