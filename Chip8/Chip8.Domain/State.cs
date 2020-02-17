@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Amilla.Chip8.Domain.Interfaces;
 using Amilla.Chip8.Domain.SeedWork;
 
 namespace Amilla.Chip8.Domain
@@ -18,7 +17,7 @@ namespace Amilla.Chip8.Domain
     /// sound timers. When these registers are non-zero, they are automatically
     /// decremented at a rate of 60Hz.
     /// </summary
-    public class State : ValueObject, IResettable
+    public class State : ValueObject
     {
         public const int NumRegisters = 16;
         public const int NumKeys = 16;

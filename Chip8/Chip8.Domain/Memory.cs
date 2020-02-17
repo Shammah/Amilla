@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Amilla.Chip8.Domain.Interfaces;
 using Amilla.Chip8.Domain.SeedWork;
 
 namespace Amilla.Chip8.Domain
@@ -20,7 +19,7 @@ namespace Amilla.Chip8.Domain
     /// We do use the first 512 KiB for the <see cref="Display.Font"/> however. This is so that
     /// the machine's <see cref="State.I"/> register can point to the font memory.
     /// </summary>
-    public class Memory : ValueObject, IResettable, IEnumerable<byte>
+    public class Memory : ValueObject, IEnumerable<byte>
     {
         /// <summary>
         /// Total size of the memory in bytes.

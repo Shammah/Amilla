@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Amilla.Chip8.Domain.Interfaces
 {
-    public interface IChip8 : IResettable
+    public interface IChip8
     {
         /// <summary>
         /// Loads a ROM directly from memory.
