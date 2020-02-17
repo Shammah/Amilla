@@ -58,7 +58,7 @@ namespace Amilla.Chip8.Domain
             set => this.RAM[i] = value;
         }
 
-        public IEnumerator<byte> GetEnumerator() => this.RAM.Cast<byte>().GetEnumerator();
+        public IEnumerator<byte> GetEnumerator() => this.RAM.AsEnumerable().GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
