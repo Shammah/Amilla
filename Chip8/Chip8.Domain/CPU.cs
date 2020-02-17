@@ -304,7 +304,7 @@ namespace Amilla.Chip8.Domain
             var res = this.Vx + this.Vy;
 
             this.Vx = (byte)res;
-            this.VF = (byte)((res >> 8) > 0 ? 1 : 0);
+            this.VF = (byte)(res >> 8 > 0 ? 1 : 0);
         }
 
         /// <summary>
@@ -315,7 +315,7 @@ namespace Amilla.Chip8.Domain
         /// </summary
         private void Sub()
         {
-            this.VF = (byte)((this.Vy > this.Vx) ? 1 : 0);
+            this.VF = (byte)(this.Vy > this.Vx ? 1 : 0);
             this.Vx -= this.Vy;
         }
 
@@ -338,7 +338,7 @@ namespace Amilla.Chip8.Domain
         /// </summary
         private void Sub2()
         {
-            this.VF = (byte)((this.Vy > this.Vx) ? 1 : 0);
+            this.VF = (byte)(this.Vy > this.Vx ? 1 : 0);
             this.Vx = (byte)(this.Vy - this.Vx);
         }
 
@@ -540,9 +540,9 @@ namespace Amilla.Chip8.Domain
         /// </summary
         private void FX33()
         {
-            this.Memory[this.State.I + 0] = (byte)((this.Vx / 100) % 10);
-            this.Memory[this.State.I + 1] = (byte)((this.Vx / 10) % 10);
-            this.Memory[this.State.I + 2] = (byte)((this.Vx / 1) % 10);
+            this.Memory[this.State.I + 0] = (byte)(this.Vx / 100 % 10);
+            this.Memory[this.State.I + 1] = (byte)(this.Vx / 10 % 10);
+            this.Memory[this.State.I + 2] = (byte)(this.Vx / 1 % 10);
         }
 
         /// <summary>
