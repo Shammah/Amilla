@@ -18,8 +18,6 @@ namespace Amilla.Chip8.MonoGame
         private SpriteBatch spriteBatch;
         private Texture2D chip8Texture;
 
-        private bool isRunning;
-
         public Chip8(Domain.Machine chip8)
         {
             Emulator = chip8;
@@ -55,11 +53,7 @@ namespace Amilla.Chip8.MonoGame
         public IChip8 Emulator { get; }
         public Domain.Machine Machine => (Domain.Machine)Emulator;
 
-        public bool IsRunning
-        {
-            get => isRunning;
-            private set => isRunning = value;
-        }
+        public bool IsRunning { get; private set; }
 
         private void RenderChip8()
         {
