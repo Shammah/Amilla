@@ -9,8 +9,8 @@ namespace Amilla.Chip8.Domain
     /// </summary>
     public class CPU
     {
-        private Action[] mainOpcodeTable;
-        private Action[] arithOpcodeTable;
+        private readonly Action[] mainOpcodeTable;
+        private readonly Action[] arithOpcodeTable;
 
         private Opcode opcode;
 
