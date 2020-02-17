@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Amilla.Chip8.Domain.Exceptions;
 
 namespace Amilla.Chip8.Domain
 {
