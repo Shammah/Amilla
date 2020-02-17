@@ -15,15 +15,15 @@ namespace Amilla.Chip8.Domain
     {
         public Machine()
         {
-            this.Memory = new Memory();
-            this.State = new State();
-            this.Display = new Display();
-            this.CPU = new CPU(
-                this.Memory,
-                this.State,
-                this.Display);
+            Memory = new Memory();
+            State = new State();
+            Display = new Display();
+            CPU = new CPU(
+                Memory,
+                State,
+                Display);
 
-            this.IsLoaded = false;
+            IsLoaded = false;
         }
 
         public Memory Memory { get; }
@@ -35,19 +35,19 @@ namespace Amilla.Chip8.Domain
         
         private void Init()
         {
-            this.State.PC = Memory.Program;
+            State.PC = Memory.Program;
 
             // Copy over the installed font into memory. This is such that
             // the I register can have a pointer to font memory.
-            this.Memory.LoadFont(Display.CreateFont());
+            Memory.LoadFont(Display.CreateFont());
         }
 
         public void Tick()
         {
-            if (this.CPU.WaitingForKey)
-                this.CPU.CheckForKeys();
+            if (CPU.WaitingForKey)
+                CPU.CheckForKeys();
             else
-                this.CPU.Execute(this.CPU.Fetch());
+                CPU.Execute(CPU.Fetch());
         }
 
         /// <summary>
@@ -55,15 +55,15 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         public void Reset()
         {
-            this.Memory.Reset();
-            this.State.Reset();
-            this.Display.Reset();
+            Memory.Reset();
+            State.Reset();
+            Display.Reset();
         }
 
         public void LoadFromMemory(byte[] rom)
         {
-            this.Memory.LoadProgram(rom);
-            this.IsLoaded = true;
+            Memory.LoadProgram(rom);
+            IsLoaded = true;
 
             Init();
         }
@@ -84,11 +84,11 @@ namespace Amilla.Chip8.Domain
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return this.State;
-            yield return this.CPU;
-            yield return this.Display;
-            yield return this.Memory;
-            yield return this.IsLoaded;
+            yield return State;
+            yield return CPU;
+            yield return Display;
+            yield return Memory;
+            yield return IsLoaded;
         }
     }
 }

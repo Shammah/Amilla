@@ -8,20 +8,20 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
 
         public Op1()
         {
-            this.chip8 = new Machine();
+            chip8 = new Machine();
         }
 
         [Fact]
         public void Op1NNN()
         {
             var program = new byte[] { 0x1F, 0xED };
-            this.chip8.LoadFromMemory(program);
+            chip8.LoadFromMemory(program);
 
             // Run one instruction.
-            this.chip8.Tick();
+            chip8.Tick();
 
             // PC should be set to FED.
-            Assert.Equal(0xFED, this.chip8.State.PC);
+            Assert.Equal(0xFED, chip8.State.PC);
         }
     }
 }

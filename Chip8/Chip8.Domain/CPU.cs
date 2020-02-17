@@ -20,13 +20,13 @@ namespace Amilla.Chip8.Domain
             State state,
             Display display)
         {
-            this.Memory = memory;
-            this.State = state;
-            this.Display = display;
+            Memory = memory;
+            State = state;
+            Display = display;
 
-            this.WaitingForKey = false;
+            WaitingForKey = false;
 
-            this.mainOpcodeTable = new Action[]
+            mainOpcodeTable = new Action[]
             {
                 Special,
                 Jump,
@@ -46,7 +46,7 @@ namespace Amilla.Chip8.Domain
                 Advanced
             };
 
-            this.arithOpcodeTable = new Action[]
+            arithOpcodeTable = new Action[]
             {
                 Store,
                 Or,
@@ -76,37 +76,37 @@ namespace Amilla.Chip8.Domain
         /// <returns>The newly fetched <see cref="Opcode"/> to execute.</returns>
         public Opcode Fetch()
         {
-            var hi = this.Memory[this.State.PC];
-            var lo = this.Memory[this.State.PC + 1];
+            var hi = Memory[State.PC];
+            var lo = Memory[State.PC + 1];
             var op = (hi << 8) | lo;
 
-            this.State.PC += 2;
+            State.PC += 2;
 
             return new Opcode((ushort)op);
         }
 
         public void Execute(Opcode op)
         {
-            this.opcode = op;
-            this.mainOpcodeTable[op.U]();
+            opcode = op;
+            mainOpcodeTable[op.U]();
         }
 
         private byte Vx
         {
-            get => this.State.V[this.opcode.X];
-            set => this.State.V[this.opcode.X] = value;
+            get => State.V[opcode.X];
+            set => State.V[opcode.X] = value;
         }
 
         private byte Vy
         {
-            get => this.State.V[this.opcode.Y];
-            set => this.State.V[this.opcode.Y] = value;
+            get => State.V[opcode.Y];
+            set => State.V[opcode.Y] = value;
         }
 
         private byte VF
         {
-            get => this.State.V[0xF];
-            set => this.State.V[0xF] = value;
+            get => State.V[0xF];
+            set => State.V[0xF] = value;
         }
 
         private void Nop() { }
@@ -116,7 +116,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Skip()
         {
-            this.State.PC += 2;
+            State.PC += 2;
         }
 
         /// <summary>
@@ -127,10 +127,10 @@ namespace Amilla.Chip8.Domain
         {
             for (byte k = 0; k < State.NumKeys; k++)
             {
-                if (!this.State.Keys[k]) continue;
+                if (!State.Keys[k]) continue;
 
-                this.Vx = k;
-                this.WaitingForKey = false;
+                Vx = k;
+                WaitingForKey = false;
             }
         }
 
@@ -142,7 +142,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Special()
         {
-            switch (this.opcode.NNN)
+            switch (opcode.NNN)
             {
                 case 0x0E0: Clear(); break;
                 case 0x0EE: Return(); break;
@@ -166,7 +166,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Clear()
         {
-            this.Display.Reset();
+            Display.Reset();
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Return()
         {
-            this.State.PC = this.State.Stack[--this.State.SP];
+            State.PC = State.Stack[--State.SP];
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Jump()
         {
-            this.State.PC = this.opcode.NNN;
+            State.PC = opcode.NNN;
         }
 
         /// <summary>
@@ -193,8 +193,8 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         void Call2()
         {
-            this.State.Stack[this.State.SP++] = this.State.PC;
-            this.State.PC = this.opcode.NNN;
+            State.Stack[State.SP++] = State.PC;
+            State.PC = opcode.NNN;
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void SkipEqualsNN()
         {
-            if (this.Vx == this.opcode.NN)
+            if (Vx == opcode.NN)
                 Skip();
         }
 
@@ -213,7 +213,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void SkipNotEqualsNN()
         {
-            if (this.Vx != this.opcode.NN)
+            if (Vx != opcode.NN)
                 Skip();
         }
 
@@ -223,7 +223,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void SkipEqualsReg()
         {
-            if (this.Vx == this.Vy)
+            if (Vx == Vy)
                 Skip();
         }
 
@@ -233,7 +233,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void StoreNN()
         {
-            this.Vx = this.opcode.NN;
+            Vx = opcode.NN;
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void AddNN()
         {
-            this.Vx += this.opcode.NN;
+            Vx += opcode.NN;
         }
 
         /// <summary>
@@ -252,12 +252,12 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Arithmetic()
         {
-            var n = this.opcode.N;
+            var n = opcode.N;
 
             if (n == 0xE)
-                this.arithOpcodeTable.Last()();
+                arithOpcodeTable.Last()();
             else
-                this.arithOpcodeTable[n]();
+                arithOpcodeTable[n]();
         }
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Store()
         {
-            this.Vx = this.Vy;
+            Vx = Vy;
         }
 
         /// <summary>
@@ -275,7 +275,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Or()
         {
-            this.Vx |= this.Vy;
+            Vx |= Vy;
         }
 
         /// <summary>
@@ -284,7 +284,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void And()
         {
-            this.Vx &= this.Vy;
+            Vx &= Vy;
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Xor()
         {
-            this.Vx ^= this.Vy;
+            Vx ^= Vy;
         }
 
         /// <summary>
@@ -304,10 +304,10 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Add()
         {
-            var res = this.Vx + this.Vy;
+            var res = Vx + Vy;
 
-            this.Vx = (byte)res;
-            this.VF = (byte)(res >> 8 > 0 ? 1 : 0);
+            Vx = (byte)res;
+            VF = (byte)(res >> 8 > 0 ? 1 : 0);
         }
 
         /// <summary>
@@ -318,8 +318,8 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Sub()
         {
-            this.VF = (byte)(this.Vy > this.Vx ? 1 : 0);
-            this.Vx -= this.Vy;
+            VF = (byte)(Vy > Vx ? 1 : 0);
+            Vx -= Vy;
         }
 
         /// <summary>
@@ -329,8 +329,8 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Shr()
         {
-            this.VF = (byte)(this.Vx & 0x1);
-            this.Vx >>= 1;
+            VF = (byte)(Vx & 0x1);
+            Vx >>= 1;
         }
 
         /// <summary>
@@ -341,8 +341,8 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Sub2()
         {
-            this.VF = (byte)(this.Vy > this.Vx ? 1 : 0);
-            this.Vx = (byte)(this.Vy - this.Vx);
+            VF = (byte)(Vy > Vx ? 1 : 0);
+            Vx = (byte)(Vy - Vx);
         }
 
         /// <summary>
@@ -352,8 +352,8 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Shl()
         {
-            this.VF = (byte)((this.Vx >> 7) & 0x1);
-            this.Vx <<= 1;
+            VF = (byte)((Vx >> 7) & 0x1);
+            Vx <<= 1;
         }
 
         /// <summary>
@@ -362,7 +362,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void SkipNotEqualsReg()
         {
-            if (this.Vx != this.Vy)
+            if (Vx != Vy)
                 Skip();
         }
 
@@ -372,7 +372,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void StoreI()
         {
-            this.State.I = this.opcode.NNN;
+            State.I = opcode.NNN;
         }
 
         /// <summary>
@@ -381,7 +381,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void JumpV0()
         {
-            this.State.PC = (ushort)(this.State.V[0] + this.opcode.NNN);
+            State.PC = (ushort)(State.V[0] + opcode.NNN);
         }
 
         /// <summary>
@@ -390,7 +390,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Rand()
         {
-            this.Vx = (byte)(this.State.Random() & this.opcode.NN);
+            Vx = (byte)(State.Random() & opcode.NN);
         }
 
         /// <summary>
@@ -409,18 +409,18 @@ namespace Amilla.Chip8.Domain
              * any screen pixels are flipped from set to unset when the sprite is drawn,
              * and to 0 if that doesn't happen.
              */
-            for (byte b = 0; b < this.opcode.N; b++)
+            for (byte b = 0; b < opcode.N; b++)
             {
-                var pixel = this.Memory[Memory.Font + this.State.I + b];
+                var pixel = Memory[Memory.Font + State.I + b];
                 for (var bit = 0; bit < 8; bit++) // Iter through each bit
                 {
                     if ((pixel & (0b10000000 >> bit)) <= 0) continue;
 
-                    var displayAddr = this.Vx + bit + (this.Vy + b) * Display.Width;
-                    if (this.Display[displayAddr])
-                        this.VF = 1;
+                    var displayAddr = Vx + bit + (Vy + b) * Display.Width;
+                    if (Display[displayAddr])
+                        VF = 1;
 
-                    this.Display[displayAddr] ^= true;
+                    Display[displayAddr] ^= true;
                 }
             }
         }
@@ -431,14 +431,14 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Key()
         {
-            var nn = this.opcode.NN;
+            var nn = opcode.NN;
 
             if (nn == 0x9E)
                 SkipKeyPressed();
             else if (nn == 0xA1)
                 SkipKeyNotPressed();
             else
-                throw new UnknownOpcodeException(this.opcode);
+                throw new UnknownOpcodeException(opcode);
         }
 
         /// <summary>
@@ -448,7 +448,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void SkipKeyPressed()
         {
-            if (this.State.Keys[this.Vx])
+            if (State.Keys[Vx])
                 Skip();
         }
 
@@ -459,7 +459,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void SkipKeyNotPressed()
         {
-            if (!this.State.Keys[this.Vx])
+            if (!State.Keys[Vx])
                 Skip();
         }
 
@@ -469,7 +469,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void Advanced()
         {
-            switch (this.opcode.NN)
+            switch (opcode.NN)
             {
                 case 0x07: LoadDelayTimer(); break;
                 case 0x0A: WaitKey(); break;
@@ -480,7 +480,7 @@ namespace Amilla.Chip8.Domain
                 case 0x33: FX33(); break;
                 case 0x55: FX55(); break;
                 case 0x65: FX65(); break;
-                default: throw new UnknownOpcodeException(this.opcode);
+                default: throw new UnknownOpcodeException(opcode);
             }
         }
 
@@ -490,7 +490,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void LoadDelayTimer()
         {
-            this.Vx = this.State.DelayTimer;
+            Vx = State.DelayTimer;
         }
 
         /// <summary>
@@ -499,7 +499,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void WaitKey()
         {
-            this.WaitingForKey = true;
+            WaitingForKey = true;
         }
 
         /// <summary>
@@ -508,7 +508,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void SetDelayTimer()
         {
-            this.State.DelayTimer = this.Vx;
+            State.DelayTimer = Vx;
         }
 
         /// <summary>
@@ -517,7 +517,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void SetSoundTimer()
         {
-            this.State.SoundTimer = this.Vx;
+            State.SoundTimer = Vx;
         }
 
         /// <summary>
@@ -526,7 +526,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void AddI()
         {
-            this.State.I += this.Vx;
+            State.I += Vx;
         }
 
         /// <summary>
@@ -536,7 +536,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void FX29()
         {
-            this.State.I = (ushort)(Memory.Font + this.Vx * Display.BytesPerSprite);
+            State.I = (ushort)(Memory.Font + Vx * Display.BytesPerSprite);
         }
 
         /// <summary>
@@ -546,9 +546,9 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         private void FX33()
         {
-            this.Memory[this.State.I + 0] = (byte)(this.Vx / 100 % 10);
-            this.Memory[this.State.I + 1] = (byte)(this.Vx / 10 % 10);
-            this.Memory[this.State.I + 2] = (byte)(this.Vx / 1 % 10);
+            Memory[State.I + 0] = (byte)(Vx / 100 % 10);
+            Memory[State.I + 1] = (byte)(Vx / 10 % 10);
+            Memory[State.I + 2] = (byte)(Vx / 1 % 10);
         }
 
         /// <summary>
@@ -559,14 +559,14 @@ namespace Amilla.Chip8.Domain
         private void FX55()
         {
             Array.Copy(
-                this.State.V,
+                State.V,
                 0,
-                this.Memory.RAM,
-                this.State.I,
-                this.opcode.X + 1);
+                Memory.RAM,
+                State.I,
+                opcode.X + 1);
 
-            this.State.I += this.opcode.X;
-            this.State.I++;
+            State.I += opcode.X;
+            State.I++;
         }
 
         /// <summary>
@@ -577,25 +577,25 @@ namespace Amilla.Chip8.Domain
         private void FX65()
         {
             Array.Copy(
-                this.Memory.RAM,
-                this.State.I,
-                this.State.V,
+                Memory.RAM,
+                State.I,
+                State.V,
                 0,
-                this.opcode.X + 1);
+                opcode.X + 1);
 
-            this.State.I += this.opcode.X;
-            this.State.I++;
+            State.I += opcode.X;
+            State.I++;
         }
 
         #endregion
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return this.State;
-            yield return this.Memory;
-            yield return this.Display;
-            yield return this.opcode;
-            yield return this.WaitingForKey;
+            yield return State;
+            yield return Memory;
+            yield return Display;
+            yield return opcode;
+            yield return WaitingForKey;
         }
     }
 }

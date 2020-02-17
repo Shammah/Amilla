@@ -8,68 +8,68 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
 
         public OpF()
         {
-            this.chip8 = new Machine();
+            chip8 = new Machine();
         }
 
         [Fact]
         public void OpFX07()
         {
             var program = new byte[] { 0xF0, 0x07 };
-            this.chip8.LoadFromMemory(program);
-            this.chip8.State.DelayTimer = 0xFF;
+            chip8.LoadFromMemory(program);
+            chip8.State.DelayTimer = 0xFF;
 
-            this.chip8.Tick();
+            chip8.Tick();
 
-            Assert.Equal(this.chip8.State.V[0x0], this.chip8.State.DelayTimer);
+            Assert.Equal(chip8.State.V[0x0], chip8.State.DelayTimer);
         }
 
         [Fact]
         public void OpFX15()
         {
             var program = new byte[] { 0xF0, 0x15 };
-            this.chip8.LoadFromMemory(program);
-            this.chip8.State.V[0x0] = 0xFF;
+            chip8.LoadFromMemory(program);
+            chip8.State.V[0x0] = 0xFF;
 
-            this.chip8.Tick();
+            chip8.Tick();
 
-            Assert.Equal(this.chip8.State.V[0x0], this.chip8.State.DelayTimer);
+            Assert.Equal(chip8.State.V[0x0], chip8.State.DelayTimer);
         }
 
         [Fact]
         public void OpFX18()
         {
             var program = new byte[] { 0xF0, 0x18 };
-            this.chip8.LoadFromMemory(program);
-            this.chip8.State.V[0x0] = 0xFF;
+            chip8.LoadFromMemory(program);
+            chip8.State.V[0x0] = 0xFF;
 
-            this.chip8.Tick();
+            chip8.Tick();
 
-            Assert.Equal(this.chip8.State.V[0x0], this.chip8.State.SoundTimer);
+            Assert.Equal(chip8.State.V[0x0], chip8.State.SoundTimer);
         }
 
         [Fact]
         public void OpFX1E()
         {
             var program = new byte[] { 0xF0, 0x1E };
-            this.chip8.LoadFromMemory(program);
-            this.chip8.State.V[0x0] = 0x0A;
-            this.chip8.State.I = 0x0A;
+            chip8.LoadFromMemory(program);
+            chip8.State.V[0x0] = 0x0A;
+            chip8.State.I = 0x0A;
 
-            this.chip8.Tick();
+            chip8.Tick();
 
-            Assert.Equal(0x0A + 0x0A, this.chip8.State.I);
+            Assert.Equal(0x0A + 0x0A, chip8.State.I);
         }
 
         [Fact]
         public void OpFX29()
         {
             var program = new byte[] { 0xF5, 0x29 }; // Hex character in V5
-            this.chip8.LoadFromMemory(program);
-            this.chip8.State.V[0x5] = 0xC;
+            chip8.LoadFromMemory(program);
+            chip8.State.V[0x5] = 0xC;
 
-            this.chip8.Tick();
+            chip8.Tick();
 
-            Assert.Equal(Memory.Font + 0xC * Display.BytesPerSprite, this.chip8.State.I);
+            Assert.Equal(Memory.Font + 0xC * Display.BytesPerSprite, chip8.State.I);
         }
 
         [Fact]
@@ -79,20 +79,20 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
             byte bcdTest = 251;
 
             var program = new byte[] { 0xF0, 0x33 };
-            this.chip8.LoadFromMemory(program);
-            this.chip8.State.I = startMemoryAddress;
-            this.chip8.State.V[0x0] = bcdTest;
+            chip8.LoadFromMemory(program);
+            chip8.State.I = startMemoryAddress;
+            chip8.State.V[0x0] = bcdTest;
 
-            this.chip8.Tick();
+            chip8.Tick();
 
             // Hundreds
-            Assert.Equal(2, this.chip8.Memory[startMemoryAddress + 0]);
+            Assert.Equal(2, chip8.Memory[startMemoryAddress + 0]);
 
             // Tens
-            Assert.Equal(5, this.chip8.Memory[startMemoryAddress + 1]);
+            Assert.Equal(5, chip8.Memory[startMemoryAddress + 1]);
 
             // Ones
-            Assert.Equal(1, this.chip8.Memory[startMemoryAddress + 2]);
+            Assert.Equal(1, chip8.Memory[startMemoryAddress + 2]);
         }
 
         [Fact]
@@ -106,19 +106,19 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
             };
 
             var program = new byte[] { 0xFB, 0x55 };
-            this.chip8.LoadFromMemory(program);
+            chip8.LoadFromMemory(program);
 
             for (var i = 0; i < values.Length; i++)
-                this.chip8.State.V[i] = values[i];
+                chip8.State.V[i] = values[i];
 
-            this.chip8.State.I = startMemoryAddress;
+            chip8.State.I = startMemoryAddress;
 
-            this.chip8.Tick();
+            chip8.Tick();
 
             for (var i = 0; i < values.Length; i++)
-                Assert.Equal(this.chip8.State.V[i], this.chip8.Memory[startMemoryAddress + i]);
+                Assert.Equal(chip8.State.V[i], chip8.Memory[startMemoryAddress + i]);
 
-            Assert.Equal(startMemoryAddress + 0xB + 1, this.chip8.State.I);
+            Assert.Equal(startMemoryAddress + 0xB + 1, chip8.State.I);
         }
 
         [Fact]
@@ -132,19 +132,19 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
             };
 
             var program = new byte[] { 0xFB, 0x65 };
-            this.chip8.LoadFromMemory(program);
+            chip8.LoadFromMemory(program);
 
             for (var i = 0; i < values.Length; i++)
-                this.chip8.Memory[startMemoryAddress + i] = values[i];
+                chip8.Memory[startMemoryAddress + i] = values[i];
 
-            this.chip8.State.I = startMemoryAddress;
+            chip8.State.I = startMemoryAddress;
 
-            this.chip8.Tick();
+            chip8.Tick();
 
             for (var i = 0; i < values.Length; i++)
-                Assert.Equal(this.chip8.State.V[i], this.chip8.Memory[startMemoryAddress + i]);
+                Assert.Equal(chip8.State.V[i], chip8.Memory[startMemoryAddress + i]);
 
-            Assert.Equal(startMemoryAddress + 0xB + 1, this.chip8.State.I);
+            Assert.Equal(startMemoryAddress + 0xB + 1, chip8.State.I);
         }
     }
 }

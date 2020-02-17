@@ -28,9 +28,9 @@ namespace Amilla.Chip8.Domain
 
         public State()
         {
-            this.V = new byte[NumRegisters];
-            this.Keys = new bool[NumKeys];
-            this.Stack = new ushort[StackSize];
+            V = new byte[NumRegisters];
+            Keys = new bool[NumKeys];
+            Stack = new ushort[StackSize];
 
             Reset();
         }
@@ -73,17 +73,17 @@ namespace Amilla.Chip8.Domain
 
         public void Reset()
         {
-            this.random = new Random();
+            random = new Random();
 
-            this.I = 0;
-            this.DelayTimer = 0;
-            this.SoundTimer = 0;
-            this.PC = 0;
-            this.SP = 0;
+            I = 0;
+            DelayTimer = 0;
+            SoundTimer = 0;
+            PC = 0;
+            SP = 0;
 
-            Array.Clear(this.V, 0, NumRegisters);
-            Array.Clear(this.Keys, 0, NumKeys);
-            Array.Clear(this.Stack, 0, StackSize);
+            Array.Clear(V, 0, NumRegisters);
+            Array.Clear(Keys, 0, NumKeys);
+            Array.Clear(Stack, 0, StackSize);
         }
 
         /// <returns>
@@ -92,26 +92,26 @@ namespace Amilla.Chip8.Domain
         public byte Random()
         {
             var randomByte = new byte[1];
-            this.random.NextBytes(randomByte);
+            random.NextBytes(randomByte);
 
             return randomByte[0];
         }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return this.I;
-            yield return this.DelayTimer;
-            yield return this.SoundTimer;
-            yield return this.PC;
-            yield return this.SP;
+            yield return I;
+            yield return DelayTimer;
+            yield return SoundTimer;
+            yield return PC;
+            yield return SP;
 
-            foreach (var v in this.V)
+            foreach (var v in V)
                 yield return v;
 
-            foreach (var mem in this.Stack)
+            foreach (var mem in Stack)
                 yield return mem;
 
-            foreach (var key in this.Keys)
+            foreach (var key in Keys)
                 yield return key;
         }
     }

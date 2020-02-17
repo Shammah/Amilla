@@ -8,7 +8,7 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
 
         public OpE()
         {
-            this.chip8 = new Machine();
+            chip8 = new Machine();
         }
 
         [Fact]
@@ -20,14 +20,14 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
                 0x1F, 0xFF, // Jump, should be skipped.
                 0x00, 0xE0, // Clear screen.
             };
-            this.chip8.LoadFromMemory(program);
-            this.chip8.State.V[0x0] = 0xF;
-            this.chip8.State.Keys[0xF] = true;
+            chip8.LoadFromMemory(program);
+            chip8.State.V[0x0] = 0xF;
+            chip8.State.Keys[0xF] = true;
 
-            this.chip8.Tick();
-            this.chip8.Tick();
+            chip8.Tick();
+            chip8.Tick();
 
-            Assert.NotEqual(0xFFF, this.chip8.State.PC);
+            Assert.NotEqual(0xFFF, chip8.State.PC);
         }
 
         [Fact]
@@ -39,15 +39,15 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
                 0x1F, 0xFF, // Jump, should be skipped.
                 0x00, 0xE0, // Clear screen.
             };
-            this.chip8.LoadFromMemory(program);
-            this.chip8.State.V[0x0] = 0xF;
-            this.chip8.State.Keys[0xF] = true;
-            this.chip8.State.Keys[0xF] = false;
+            chip8.LoadFromMemory(program);
+            chip8.State.V[0x0] = 0xF;
+            chip8.State.Keys[0xF] = true;
+            chip8.State.Keys[0xF] = false;
 
-            this.chip8.Tick();
-            this.chip8.Tick();
+            chip8.Tick();
+            chip8.Tick();
 
-            Assert.NotEqual(0xFFF, this.chip8.State.PC);
+            Assert.NotEqual(0xFFF, chip8.State.PC);
         }
     }
 }

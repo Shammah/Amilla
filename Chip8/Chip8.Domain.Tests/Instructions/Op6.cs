@@ -8,20 +8,20 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
 
         public Op6()
         {
-            this.chip8 = new Machine();
+            chip8 = new Machine();
         }
 
         [Fact]
         public void Op6XNN()
         {
             var program = new byte[] { 0x60, 0xFF };
-            this.chip8.LoadFromMemory(program);
+            chip8.LoadFromMemory(program);
 
             // Run one instruction.
-            this.chip8.Tick();
+            chip8.Tick();
 
             // Make sure the register value was set.
-            Assert.Equal(0xFF, this.chip8.State.V[0x0]);
+            Assert.Equal(0xFF, chip8.State.V[0x0]);
         }
     }
 }

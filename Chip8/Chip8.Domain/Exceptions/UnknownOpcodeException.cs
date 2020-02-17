@@ -8,7 +8,7 @@ namespace Amilla.Chip8.Domain.Exceptions
 
         public UnknownOpcodeException(Opcode op)
         {
-            this.Opcode = op;
+            Opcode = op;
         }
     }
 }

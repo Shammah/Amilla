@@ -18,7 +18,7 @@ namespace Amilla.Chip8.Domain
     {
         public Opcode(ushort op)
         {
-            this.NNNN = op;
+            NNNN = op;
         }
 
         /// <summary>
@@ -30,43 +30,43 @@ namespace Amilla.Chip8.Domain
         /// The lowest 12 bits of the instruction.
         /// Sometimes referred to as 'addr'.
         /// </summary>
-        public ushort NNN => (ushort)(this.NNNN & 0xFFF);
+        public ushort NNN => (ushort)(NNNN & 0xFFF);
 
         /// <summary>
         /// The lowest 8 bits of the instruction.
         /// Sometimes referred to as 'byte'.
         /// </summary>
-        public byte NN => (byte)(this.NNNN & 0xFF);
+        public byte NN => (byte)(NNNN & 0xFF);
 
         /// <summary>
         /// The same as <see cref="NN"/>.
         /// </summary>
-        public byte KK => this.NN;
+        public byte KK => NN;
 
         /// <summary>
         /// A 4-bit value, the upper 4 bits of the high byte of the instruction.
         /// </summary>
-        public byte U => (byte)((this.NNNN >> 12) & 0xF);
+        public byte U => (byte)((NNNN >> 12) & 0xF);
 
         /// <summary>
         /// A 4-bit value, the lower 4 bits of the high byte of the instruction.
         /// </summary>
-        public byte X => (byte)((this.NNNN >> 8) & 0xF);
+        public byte X => (byte)((NNNN >> 8) & 0xF);
 
         /// <summary>
         /// A 4-bit value, the upper 4 bits of the low byte of the instruction.
         /// </summary>
-        public byte Y => (byte)((this.NNNN >> 4) & 0xF);
+        public byte Y => (byte)((NNNN >> 4) & 0xF);
 
         /// <summary>
         /// A 4-bit value, the lower 4 bits of the low byte of the instruction.
         /// Sometimes referred to as 'nibble'.
         /// </summary>
-        public byte N => (byte)(this.NNNN & 0xF);
+        public byte N => (byte)(NNNN & 0xF);
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return this.NNNN;
+            yield return NNNN;
         }
     }
 }

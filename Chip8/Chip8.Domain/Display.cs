@@ -23,7 +23,7 @@ namespace Amilla.Chip8.Domain
 
         public Display()
         {
-            this.Pixels = new bool[Width * Height];
+            Pixels = new bool[Width * Height];
 
             Reset();
         }
@@ -35,11 +35,11 @@ namespace Amilla.Chip8.Domain
 
         public bool this[int i]
         {
-            get => this.Pixels[i];
-            set => this.Pixels[i] = value;
+            get => Pixels[i];
+            set => Pixels[i] = value;
         }
 
-        public IEnumerator<bool> GetEnumerator() => this.Pixels.AsEnumerable().GetEnumerator();
+        public IEnumerator<bool> GetEnumerator() => Pixels.AsEnumerable().GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         public void Reset()
         {
-            Array.Clear(this.Pixels, 0, Width * Height);
+            Array.Clear(Pixels, 0, Width * Height);
         }
 
         /// <summary>

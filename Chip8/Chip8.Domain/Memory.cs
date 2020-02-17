@@ -39,7 +39,7 @@ namespace Amilla.Chip8.Domain
 
         public Memory()
         {
-            this.RAM = new byte[RAMSize];
+            RAM = new byte[RAMSize];
 
             Reset();
         }
@@ -55,11 +55,11 @@ namespace Amilla.Chip8.Domain
         /// <returns>The value of the memory at a specific address.</returns>
         public byte this[int i]
         {
-            get => this.RAM[i];
-            set => this.RAM[i] = value;
+            get => RAM[i];
+            set => RAM[i] = value;
         }
 
-        public IEnumerator<byte> GetEnumerator() => this.RAM.AsEnumerable().GetEnumerator();
+        public IEnumerator<byte> GetEnumerator() => RAM.AsEnumerable().GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
@@ -68,10 +68,10 @@ namespace Amilla.Chip8.Domain
         /// <param name="program">The program data to put into memory.</param>
         public void LoadProgram(byte[] program)
         {
-            if (program.Length >= Memory.RAMSize - Memory.Program)
-                throw new ArgumentException($"ROM size ({program.Length} bytes) does not fit in memory ({Memory.RAMSize - Memory.Program} bytes)");
+            if (program.Length >= RAMSize - Program)
+                throw new ArgumentException($"ROM size ({program.Length} bytes) does not fit in memory ({RAMSize - Program} bytes)");
 
-            program.CopyTo(this.RAM, Program);
+            program.CopyTo(RAM, Program);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace Amilla.Chip8.Domain
         public void LoadFont(byte[] font)
         {
             if (font.Length >= Program)
-                throw new ArgumentException($"Font size ({font.Length} bytes) does not fit in memory portion for fonts ({Memory.Program} bytes)");
+                throw new ArgumentException($"Font size ({font.Length} bytes) does not fit in memory portion for fonts ({Program} bytes)");
 
-            font.CopyTo(this.RAM, Font);
+            font.CopyTo(RAM, Font);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         public void Reset()
         {
-            Array.Clear(this.RAM, 0, RAMSize);
+            Array.Clear(RAM, 0, RAMSize);
         }
 
         protected override IEnumerable<object> GetAtomicValues()

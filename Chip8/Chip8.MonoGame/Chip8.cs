@@ -22,16 +22,16 @@ namespace Amilla.Chip8.MonoGame
 
         public Chip8(Domain.Machine chip8)
         {
-            this.Emulator = chip8;
+            Emulator = chip8;
 
-            this.graphics = new GraphicsDeviceManager(this)
+            graphics = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferWidth = Width,
                 PreferredBackBufferHeight = Height
             };
-            this.graphics.ApplyChanges();
+            graphics.ApplyChanges();
 
-            this.keyMapping = new Dictionary<Keys, int>()
+            keyMapping = new Dictionary<Keys, int>()
             {
                 { Keys.D0, 0x0 },
                 { Keys.D1, 0x1 },
@@ -53,30 +53,30 @@ namespace Amilla.Chip8.MonoGame
         }
 
         public IChip8Emulator Emulator { get; }
-        public Domain.Machine Machine => (Domain.Machine)this.Emulator;
+        public Domain.Machine Machine => (Domain.Machine)Emulator;
 
         public bool IsRunning
         {
-            get => this.isRunning;
-            private set => this.isRunning = value;
+            get => isRunning;
+            private set => isRunning = value;
         }
 
         private void RenderChip8()
         {
-            var pixels = this.Machine
+            var pixels = Machine
                 .Display
                 .Select(p => p
                     ? Color.White
                     : Color.Black)
                 .ToArray();
 
-            this.chip8Texture.SetData(pixels);
+            chip8Texture.SetData(pixels);
         }
 
         protected override void LoadContent()
         {
-            this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
-            this.chip8Texture = new Texture2D(this.GraphicsDevice,
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            chip8Texture = new Texture2D(GraphicsDevice,
                 Domain.Display.Width,
                 Domain.Display.Height);
 
@@ -87,42 +87,42 @@ namespace Amilla.Chip8.MonoGame
         {
             // Update keys.
             var kb = Keyboard.GetState();
-            foreach (var button in this.keyMapping)
-                this.Machine.State.Keys[button.Value] = kb.IsKeyDown(button.Key);
+            foreach (var button in keyMapping)
+                Machine.State.Keys[button.Value] = kb.IsKeyDown(button.Key);
 
-            if (this.Emulator.IsLoaded)
-                this.Emulator.Tick();
+            if (Emulator.IsLoaded)
+                Emulator.Tick();
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             RenderChip8();
 
-            this.spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-            this.spriteBatch.Draw(this.chip8Texture,
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            spriteBatch.Draw(chip8Texture,
                 new Rectangle(0, 0, Width, Height),
                 Color.White);
-            this.spriteBatch.End();
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
         public void Start()
         {
-            if (this.IsRunning)
+            if (IsRunning)
                 return;
 
-            this.IsRunning = true;
+            IsRunning = true;
             Run();
         }
 
         public void Stop()
         {
-            this.IsRunning = false;
+            IsRunning = false;
             Exit();
         }
     }

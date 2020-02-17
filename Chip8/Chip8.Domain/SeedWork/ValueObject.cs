@@ -23,7 +23,7 @@ namespace Amilla.Chip8.Domain.SeedWork
 
         public override bool Equals(object obj)
         {
-            if (obj == null || obj.GetType() != this.GetType())
+            if (obj == null || obj.GetType() != GetType())
                 return false;
 
             var other = (ValueObject)obj;
@@ -41,7 +41,7 @@ namespace Amilla.Chip8.Domain.SeedWork
             return !thisValues.MoveNext() && !otherValues.MoveNext();
         }
 
-        public override int GetHashCode() => this.GetAtomicValues()
+        public override int GetHashCode() => GetAtomicValues()
            .Select(x => x != null ? x.GetHashCode() : 0)
            .Aggregate((x, y) => x ^ y);
     }
