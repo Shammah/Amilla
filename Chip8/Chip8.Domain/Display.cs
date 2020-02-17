@@ -19,7 +19,6 @@ namespace Amilla.Chip8.Domain
         public const int Width = 64;
         public const int Height = 32;
         public const int BytesPerSprite = 5;
-        public const int FontMemorySize = 16 * BytesPerSprite;
 
         public Display()
         {
@@ -56,7 +55,7 @@ namespace Amilla.Chip8.Domain
         /// </summary>
         public static byte[] CreateFont()
         {
-            return new byte[FontMemorySize]
+            return new byte[]
             {
                 0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
                 0x20, 0x60, 0x20, 0x20, 0x70, // 1
