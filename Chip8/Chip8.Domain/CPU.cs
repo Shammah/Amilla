@@ -175,7 +175,6 @@ namespace Amilla.Chip8.Domain
             this.State.PC = this.State.Stack[--this.State.SP];
         }
 
-
         /// <summary>
         /// 1NNN
         /// Jump to address.
@@ -184,7 +183,6 @@ namespace Amilla.Chip8.Domain
         {
             this.State.PC = this.opcode.NNN;
         }
-
 
         /// <summary>
         /// 2NNN
@@ -206,7 +204,6 @@ namespace Amilla.Chip8.Domain
                 Skip();
         }
 
-
         /// <summary>
         /// 4XNN
         /// Skip the following instruction if the value of register VX is not equal to NN.
@@ -216,7 +213,6 @@ namespace Amilla.Chip8.Domain
             if (this.Vx != this.opcode.NN)
                 Skip();
         }
-
 
         /// <summary>
         /// 5XY0
@@ -228,7 +224,6 @@ namespace Amilla.Chip8.Domain
                 Skip();
         }
 
-
         /// <summary>
         /// 6XNN
         /// Store number NN in register VX.
@@ -237,7 +232,6 @@ namespace Amilla.Chip8.Domain
         {
             this.Vx = this.opcode.NN;
         }
-
 
         /// <summary>
         /// 7XNN
@@ -248,7 +242,6 @@ namespace Amilla.Chip8.Domain
         {
             this.Vx += this.opcode.NN;
         }
-
 
         /// <summary>
         /// 8   
@@ -360,7 +353,6 @@ namespace Amilla.Chip8.Domain
             this.Vx <<= 1;
         }
 
-
         /// <summary>
         /// 9XY0
         /// Skip the following instruction if the value of register VX is not equal to the value of register VY.
@@ -371,7 +363,6 @@ namespace Amilla.Chip8.Domain
                 Skip();
         }
 
-
         /// <summary>
         /// ANNN
         /// Store memory address NNN in register I.
@@ -380,7 +371,6 @@ namespace Amilla.Chip8.Domain
         {
             this.State.I = this.opcode.NNN;
         }
-
 
         /// <summary>
         /// BNNN
@@ -391,7 +381,6 @@ namespace Amilla.Chip8.Domain
             this.State.PC = (ushort)(this.State.V[0] + this.opcode.NNN);
         }
 
-
         /// <summary>
         /// CXNN
         /// Set VX to a random number with a mask of NN.
@@ -400,7 +389,6 @@ namespace Amilla.Chip8.Domain
         {
             this.Vx = (byte)(this.State.Random() & this.opcode.NN);
         }
-
 
         /// <summary>
         /// DXYN
@@ -434,7 +422,6 @@ namespace Amilla.Chip8.Domain
                 }
             }
         }
-
 
         /// <summary>
         /// E
@@ -471,7 +458,6 @@ namespace Amilla.Chip8.Domain
             if (!this.State.Keys[this.Vx])
                 Skip();
         }
-
 
         /// <summary>
         /// F   
@@ -538,7 +524,6 @@ namespace Amilla.Chip8.Domain
         {
             this.State.I += this.Vx;
         }
-
 
         /// <summary>
         /// FX29
