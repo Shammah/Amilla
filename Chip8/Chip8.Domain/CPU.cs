@@ -411,14 +411,13 @@ namespace Amilla.Chip8.Domain
                 var pixel = this.Memory[Memory.Font + this.State.I + b];
                 for (var bit = 0; bit < 8; bit++) // Iter through each bit
                 {
-                    if ((pixel & (0b10000000 >> bit)) > 0)
-                    {
-                        var displayAddr = this.Vx + bit + (this.Vy + b) * Display.Width;
-                        if (this.Display[displayAddr])
-                            this.VF = 1;
+                    if ((pixel & (0b10000000 >> bit)) <= 0) continue;
 
-                        this.Display[displayAddr] ^= true;
-                    }
+                    var displayAddr = this.Vx + bit + (this.Vy + b) * Display.Width;
+                    if (this.Display[displayAddr])
+                        this.VF = 1;
+
+                    this.Display[displayAddr] ^= true;
                 }
             }
         }
