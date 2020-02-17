@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Amilla.Chip8.MonoGame
 {
-    public class Chip8 : Game, IChip8EmulatorShell
+    public class Chip8 : Game, IChip8Shell
     {
         public const int Width = 640;
         public const int Height = 480;
@@ -52,7 +52,7 @@ namespace Amilla.Chip8.MonoGame
             };
         }
 
-        public IChip8Emulator Emulator { get; }
+        public IChip8 Emulator { get; }
         public Domain.Machine Machine => (Domain.Machine)Emulator;
 
         public bool IsRunning

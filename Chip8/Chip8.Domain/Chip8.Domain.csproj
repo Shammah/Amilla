@@ -6,8 +6,4 @@
     <RootNamespace>Amilla.Chip8.Domain</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>

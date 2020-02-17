@@ -11,7 +11,7 @@ namespace Amilla.Chip8.Domain
     /// An actual Chip8 machine emulator.
     /// Basically a face class; it contains all various machine components.
     /// </summary>
-    public class Machine : ValueObject, IChip8Emulator
+    public class Machine : ValueObject, IChip8
     {
         public Machine()
         {

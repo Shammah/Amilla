@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Amilla.Chip8.Domain.Interfaces
 {
-    public interface IEmulator : IResettable
+    public interface IChip8 : IResettable
     {
         /// <summary>
         /// Loads a ROM directly from memory.
@@ -24,10 +24,10 @@ namespace Amilla.Chip8.Domain.Interfaces
         /// Advances the emulator by one CPU cycle.
         /// </summary>
         void Tick();
- 
+
         /// <returns>
         /// Whether a ROM is currently loaded.
         /// </returns>
         bool IsLoaded { get; }
-   }
+    }
 }
