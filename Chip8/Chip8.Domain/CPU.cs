@@ -197,7 +197,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 3XNN
         /// Skip the following instruction if the value of register VX equals NN.
-        /// </summary
+        /// </summary>
         private void SkipEqualsNN()
         {
             if (this.Vx == this.opcode.NN)
@@ -207,7 +207,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 4XNN
         /// Skip the following instruction if the value of register VX is not equal to NN.
-        /// </summary
+        /// </summary>
         private void SkipNotEqualsNN()
         {
             if (this.Vx != this.opcode.NN)
@@ -217,7 +217,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 5XY0
         /// Skip the following instruction if the value of register VX is equal to the value of register VY.
-        /// </summary
+        /// </summary>
         private void SkipEqualsReg()
         {
             if (this.Vx == this.Vy)
@@ -227,7 +227,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 6XNN
         /// Store number NN in register VX.
-        /// </summary
+        /// </summary>
         private void StoreNN()
         {
             this.Vx = this.opcode.NN;
@@ -237,7 +237,7 @@ namespace Amilla.Chip8.Domain
         /// 7XNN
         /// Add the value NN to register VX.
         /// This may overflow VX, which is by design.
-        /// </summary
+        /// </summary>
         private void AddNN()
         {
             this.Vx += this.opcode.NN;
@@ -246,7 +246,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 8   
         /// Call any of the arithmetic functions.
-        /// </summary
+        /// </summary>
         private void Arithmetic()
         {
             var n = this.opcode.N;
@@ -260,7 +260,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 8XY0
         /// Store the value of register VY in register VX.
-        /// </summary
+        /// </summary>
         private void Store()
         {
             this.Vx = this.Vy;
@@ -269,7 +269,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 8XY1
         /// Set VX to VX OR VY.
-        /// </summary
+        /// </summary>
         private void Or()
         {
             this.Vx |= this.Vy;
@@ -278,7 +278,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 8XY2
         /// Set VX to VX AND VY.
-        /// </summary
+        /// </summary>
         private void And()
         {
             this.Vx &= this.Vy;
@@ -287,7 +287,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 8XY3
         /// Set VX to VX XOR VY.
-        /// </summary
+        /// </summary>
         private void Xor()
         {
             this.Vx ^= this.Vy;
@@ -298,7 +298,7 @@ namespace Amilla.Chip8.Domain
         /// Add the value of register VY to register VX.
         /// Set VF to 01 if a carry occurs.
         /// Set VF to 00 if a carry does not occur.
-        /// </summary
+        /// </summary>
         private void Add()
         {
             var res = this.Vx + this.Vy;
@@ -312,7 +312,7 @@ namespace Amilla.Chip8.Domain
         /// Subtract the value of register VY from register VX.
         /// Set VF to 00 if a borrow occurs.
         /// Set VF to 01 if a borrow does not occur.
-        /// </summary
+        /// </summary>
         private void Sub()
         {
             this.VF = (byte)(this.Vy > this.Vx ? 1 : 0);
@@ -323,7 +323,7 @@ namespace Amilla.Chip8.Domain
         /// 8XY6
         /// Store the value of register VX shifted right one bit in register VX.
         /// Set register VF to the least significant bit prior to the shift.
-        /// </summary
+        /// </summary>
         private void Shr()
         {
             this.VF = (byte)(this.Vx & 0x1);
@@ -335,7 +335,7 @@ namespace Amilla.Chip8.Domain
         /// Set register VX to the value of VY minus VX
         /// Set VF to 00 if a borrow occurs.
         /// Set VF to 01 if a borrow does not occur.
-        /// </summary
+        /// </summary>
         private void Sub2()
         {
             this.VF = (byte)(this.Vy > this.Vx ? 1 : 0);
@@ -346,7 +346,7 @@ namespace Amilla.Chip8.Domain
         /// 8XYE
         /// Store the value of register VX shifted left one bit in register VX.
         /// Set register VF to the most significant bit prior to the shift.
-        /// </summary
+        /// </summary>
         private void Shl()
         {
             this.VF = (byte)((this.Vx >> 7) & 0x1);
@@ -356,7 +356,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// 9XY0
         /// Skip the following instruction if the value of register VX is not equal to the value of register VY.
-        /// </summary
+        /// </summary>
         private void SkipNotEqualsReg()
         {
             if (this.Vx != this.Vy)
@@ -366,7 +366,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// ANNN
         /// Store memory address NNN in register I.
-        /// </summary
+        /// </summary>
         private void StoreI()
         {
             this.State.I = this.opcode.NNN;
@@ -375,7 +375,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// BNNN
         /// Jump to address NNN + V0.
-        /// </summary
+        /// </summary>
         private void JumpV0()
         {
             this.State.PC = (ushort)(this.State.V[0] + this.opcode.NNN);
@@ -384,7 +384,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// CXNN
         /// Set VX to a random number with a mask of NN.
-        /// </summary
+        /// </summary>
         private void Rand()
         {
             this.Vx = (byte)(this.State.Random() & this.opcode.NN);
@@ -394,7 +394,7 @@ namespace Amilla.Chip8.Domain
         /// DXYN
         /// Draw a sprite at position VX, VY with N bytes of sprite data starting at the address stored in I.
         /// Set VF to 01 if any set pixels are changed to unset, and 00 otherwise.
-        /// </summary
+        /// </summary>
         private void Draw()
         {
             /**
@@ -425,7 +425,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// E
         /// Call any of the keypress functions.
-        /// </summary
+        /// </summary>
         private void Key()
         {
             var nn = this.opcode.NN;
@@ -441,7 +441,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// EX9E
         /// Skip the following instruction if the key corresponding to the hex value currently stored in register VX is pressed.
-        /// </summary
+        /// </summary>
         private void SkipKeyPressed()
         {
             if (this.State.Keys[this.Vx])
@@ -451,7 +451,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// EXA1
         /// Skip the following instruction if the key corresponding to the hex value currently stored in register VX is not pressed.
-        /// </summary
+        /// </summary>
         private void SkipKeyNotPressed()
         {
             if (!this.State.Keys[this.Vx])
@@ -461,7 +461,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// F   
         /// Call any of the advanced functions.
-        /// </summary
+        /// </summary>
         private void Advanced()
         {
             switch (this.opcode.NN)
@@ -482,7 +482,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX07
         /// Store the current value of the delay timer in register VX.
-        /// </summary
+        /// </summary>
         private void LoadDelayTimer()
         {
             this.Vx = this.State.DelayTimer;
@@ -491,7 +491,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX0A
         /// Wait for a keypress and store the result in register VX.
-        /// </summary
+        /// </summary>
         private void WaitKey()
         {
             this.WaitingForKey = true;
@@ -500,7 +500,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX15
         /// Set the delay timer to the value of register VX.
-        /// </summary
+        /// </summary>
         private void SetDelayTimer()
         {
             this.State.DelayTimer = this.Vx;
@@ -509,7 +509,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX18
         /// Set the sound timer to the value of register VX.
-        /// </summary
+        /// </summary>
         private void SetSoundTimer()
         {
             this.State.SoundTimer = this.Vx;
@@ -518,7 +518,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX1E
         /// Add the value stored in register VX to register I.
-        /// </summary
+        /// </summary>
         private void AddI()
         {
             this.State.I += this.Vx;
@@ -527,7 +527,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX29
         /// Set I to the memory address of the sprite data corresponding to the hexadecimal digit stored in register VX.
-        /// </summary
+        /// </summary>
         private void FX29()
         {
             this.State.I = (ushort)(Memory.Font + this.Vx * Display.BytesPerSprite);
@@ -536,7 +536,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX33
         /// Store the binary-coded decimal equivalent of the value stored in register VX at addresses I, I + 1, and I + 2.
-        /// </summary
+        /// </summary>
         private void FX33()
         {
             this.Memory[this.State.I + 0] = (byte)(this.Vx / 100 % 10);
@@ -547,7 +547,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX55
         /// Store the values of registers V0 to VX inclusive in memory starting at address I. I is set to I + X + 1 after operation..
-        /// </summary
+        /// </summary>
         private void FX55()
         {
             Array.Copy(this.State.V, 0, this.Memory.RAM, this.State.I, this.opcode.X + 1);
@@ -558,7 +558,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX65
         /// Fill registers V0 to VX inclusive with the values stored in memory starting at address I. I is set to I + X + 1 after operation..
-        /// </summary
+        /// </summary>
         private void FX65()
         {
             Array.Copy(this.Memory.RAM, this.State.I, this.State.V, 0, this.opcode.X + 1);
