@@ -16,7 +16,7 @@ namespace Amilla.Chip8.Domain
     /// Chip8 also has two special purpose 8-bit registers, for the delay and
     /// sound timers. When these registers are non-zero, they are automatically
     /// decremented at a rate of 60Hz.
-    /// </summary
+    /// </summary>
     public class State : ValueObject
     {
         public const int NumRegisters = 16;
