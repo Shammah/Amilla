@@ -39,7 +39,7 @@ namespace Amilla.Chip8.Domain
             set => this.Pixels[i] = value;
         }
 
-        public IEnumerator<bool> GetEnumerator() => this.Pixels.Cast<bool>().GetEnumerator();
+        public IEnumerator<bool> GetEnumerator() => this.Pixels.AsEnumerable().GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
