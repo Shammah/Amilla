@@ -125,11 +125,10 @@ namespace Amilla.Chip8.Domain
         {
             for (byte k = 0; k < State.NumKeys; k++)
             {
-                if (this.State.Keys[k])
-                {
-                    this.Vx = k;
-                    this.WaitingForKey = false;
-                }
+                if (!this.State.Keys[k]) continue;
+
+                this.Vx = k;
+                this.WaitingForKey = false;
             }
         }
 
