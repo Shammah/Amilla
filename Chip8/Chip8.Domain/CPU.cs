@@ -153,7 +153,8 @@ namespace Amilla.Chip8.Domain
         /// Execute machine language subroutine at address NNN.
         /// </summary>
         /// <remarks>
-        /// This instruction is only used on the old computers on which Chip-8 was originally implemented. It is ignored by modern interpreters.
+        /// This instruction is only used on the old computers on which Chip-8 was originally implemented.
+        /// It is ignored by modern interpreters.
         /// </remarks>
         private void Call() { }
 
@@ -440,7 +441,8 @@ namespace Amilla.Chip8.Domain
 
         /// <summary>
         /// EX9E
-        /// Skip the following instruction if the key corresponding to the hex value currently stored in register VX is pressed.
+        /// Skip the following instruction if the key corresponding to the hex value
+        /// currently stored in register VX is pressed.
         /// </summary>
         private void SkipKeyPressed()
         {
@@ -450,7 +452,8 @@ namespace Amilla.Chip8.Domain
 
         /// <summary>
         /// EXA1
-        /// Skip the following instruction if the key corresponding to the hex value currently stored in register VX is not pressed.
+        /// Skip the following instruction if the key corresponding to the hex value
+        /// currently stored in register VX is not pressed.
         /// </summary>
         private void SkipKeyNotPressed()
         {
@@ -526,7 +529,8 @@ namespace Amilla.Chip8.Domain
 
         /// <summary>
         /// FX29
-        /// Set I to the memory address of the sprite data corresponding to the hexadecimal digit stored in register VX.
+        /// Set I to the memory address of the sprite data
+        /// corresponding to the hexadecimal digit stored in register VX.
         /// </summary>
         private void FX29()
         {
@@ -535,7 +539,8 @@ namespace Amilla.Chip8.Domain
 
         /// <summary>
         /// FX33
-        /// Store the binary-coded decimal equivalent of the value stored in register VX at addresses I, I + 1, and I + 2.
+        /// Store the binary-coded decimal equivalent of the value stored
+        /// in register VX at addresses I, I + 1, and I + 2.
         /// </summary>
         private void FX33()
         {
@@ -546,22 +551,36 @@ namespace Amilla.Chip8.Domain
 
         /// <summary>
         /// FX55
-        /// Store the values of registers V0 to VX inclusive in memory starting at address I. I is set to I + X + 1 after operation..
+        /// Store the values of registers V0 to VX inclusive in memory starting at address I.
+        /// I is set to I + X + 1 after operation..
         /// </summary>
         private void FX55()
         {
-            Array.Copy(this.State.V, 0, this.Memory.RAM, this.State.I, this.opcode.X + 1);
+            Array.Copy(
+                this.State.V,
+                0,
+                this.Memory.RAM,
+                this.State.I,
+                this.opcode.X + 1);
+
             this.State.I += this.opcode.X;
             this.State.I++;
         }
 
         /// <summary>
         /// FX65
-        /// Fill registers V0 to VX inclusive with the values stored in memory starting at address I. I is set to I + X + 1 after operation..
+        /// Fill registers V0 to VX inclusive with the values stored in memory starting at address I.
+        /// I is set to I + X + 1 after operation..
         /// </summary>
         private void FX65()
         {
-            Array.Copy(this.Memory.RAM, this.State.I, this.State.V, 0, this.opcode.X + 1);
+            Array.Copy(
+                this.Memory.RAM,
+                this.State.I,
+                this.State.V,
+                0,
+                this.opcode.X + 1);
+
             this.State.I += this.opcode.X;
             this.State.I++;
         }
