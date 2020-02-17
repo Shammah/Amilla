@@ -10,7 +10,7 @@ namespace Amilla.Chip8.Domain
     /// An actual Chip8 machine emulator.
     /// Basically a face class; it contains all various machine components.
     /// </summary>
-    public class Machine : IChip8Emulator, IResettable
+    public class Machine : IChip8Emulator
     {
         private bool isLoaded;
 
