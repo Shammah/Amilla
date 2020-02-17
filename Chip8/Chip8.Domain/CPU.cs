@@ -9,9 +9,6 @@ namespace Amilla.Chip8.Domain
     /// </summary>
     public class CPU
     {
-        public const int NumMainOpcodes = 0x10;
-        public const int NumArithOpcodes = 0x9;
-
         private Action[] mainOpcodeTable;
         private Action[] arithOpcodeTable;
 
