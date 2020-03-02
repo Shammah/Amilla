@@ -417,7 +417,7 @@ namespace Amilla.Chip8.Domain
                 {
                     if ((pixel & (0b10000000 >> bit)) <= 0) continue;
 
-                    var displayAddr = Vx + bit + (Vy + b) * Display.Width;
+                    var displayAddr = (Vx + bit + (Vy + b) * Display.Width) % (Display.Width * Display.Height);
                     if (Display[displayAddr])
                         VF = 1;
 
