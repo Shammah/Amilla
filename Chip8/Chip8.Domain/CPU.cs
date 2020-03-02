@@ -554,7 +554,7 @@ namespace Amilla.Chip8.Domain
         /// <summary>
         /// FX55
         /// Store the values of registers V0 to VX inclusive in memory starting at address I.
-        /// I is set to I + X + 1 after operation..
+        /// The offset from I is increased by 1 for each value written, but I itself is left unmodified.
         /// </summary>
         private void FX55()
         {
@@ -564,15 +564,12 @@ namespace Amilla.Chip8.Domain
                 Memory.RAM,
                 State.I,
                 opcode.X + 1);
-
-            State.I += opcode.X;
-            State.I++;
         }
 
         /// <summary>
         /// FX65
         /// Fill registers V0 to VX inclusive with the values stored in memory starting at address I.
-        /// I is set to I + X + 1 after operation..
+        /// The offset from I is increased by 1 for each value written, but I itself is left unmodified.
         /// </summary>
         private void FX65()
         {
@@ -582,9 +579,6 @@ namespace Amilla.Chip8.Domain
                 State.V,
                 0,
                 opcode.X + 1);
-
-            State.I += opcode.X;
-            State.I++;
         }
 
         #endregion

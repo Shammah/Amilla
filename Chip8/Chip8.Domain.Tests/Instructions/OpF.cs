@@ -118,7 +118,8 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
             for (var i = 0; i < values.Length; i++)
                 Assert.Equal(chip8.State.V[i], chip8.Memory[startMemoryAddress + i]);
 
-            Assert.Equal(startMemoryAddress + 0xB + 1, chip8.State.I);
+            // I should be left unmodified.
+            Assert.Equal(startMemoryAddress, chip8.State.I);
         }
 
         [Fact]
@@ -144,7 +145,8 @@ namespace Amilla.Chip8.Domain.Tests.Instructions
             for (var i = 0; i < values.Length; i++)
                 Assert.Equal(chip8.State.V[i], chip8.Memory[startMemoryAddress + i]);
 
-            Assert.Equal(startMemoryAddress + 0xB + 1, chip8.State.I);
+            // I should be left unmodified.
+            Assert.Equal(startMemoryAddress, chip8.State.I);
         }
     }
 }
