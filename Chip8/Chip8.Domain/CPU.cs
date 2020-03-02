@@ -409,6 +409,7 @@ namespace Amilla.Chip8.Domain
              * any screen pixels are flipped from set to unset when the sprite is drawn,
              * and to 0 if that doesn't happen.
              */
+            VF = 0;
             for (byte b = 0; b < opcode.N; b++)
             {
                 var pixel = Memory[Memory.Font + State.I + b];
